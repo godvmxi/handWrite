@@ -12,7 +12,8 @@ TARGET = HandWrite
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        hangwriteui.cpp
+SOURCES += main.cpp \
+    handwritecore.cpp
 
-HEADERS  += hangwriteui.h
+HEADERS  += \
+    handwritecore.h

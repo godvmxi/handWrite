@@ -1,26 +1,29 @@
-#ifndef HANGWRITEUI_H
-#define HANGWRITEUI_H
+#ifndef HandWriteCore_H
+#define HandWriteCore_H
 
 #include <QWidget>
 #include <QMouseEvent>
 #include <QDebug>
 #include <QDateTime>
+#include <QTimer>
 typedef  struct {
     int x ;
     int y;
     long long timestamp;
 } Point;
-class HangWriteUi : public QWidget
+class HandWriteCore : public QWidget
 {
     Q_OBJECT
 private :
     long long first_point_time ;
+    int timeout = 0;
+    QTimer *timer ;
 public:
-    HangWriteUi(QWidget *parent = 0);
-    ~HangWriteUi();
+    HandWriteCore(QWidget *parent = 0);
+    ~HandWriteCore();
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
 };
 
-#endif // HANGWRITEUI_H
+#endif // HandWriteCore_H

@@ -1,10 +1,44 @@
 #include "handwritecore.h"
 
+
+
+int HandWriteCore::getLineWidth() const
+{
+    return lineWidth;
+}
+
+void HandWriteCore::setLineWidth(int value)
+{
+    lineWidth = value;
+}
+
+int HandWriteCore::getDrawTimeout() const
+{
+    return drawTimeout;
+}
+
+void HandWriteCore::setDrawTimeout(int value)
+{
+    drawTimeout = value;
+}
+
+QColor HandWriteCore::getLineColor() const
+{
+    return lineColor;
+}
+
+void HandWriteCore::setLineColor(const QColor &value)
+{
+    lineColor = value;
+}
 HandWriteCore::HandWriteCore(QWidget *parent)
     : QWidget(parent)
 {
+    this->drawTimeout =  1000;//1s
+    this->lineWidth =  5;
+    this->lineColor =  QColor(Qt::red) ;
     this->timer = new QTimer();
-    this->timer->setInterval(this->timeout);
+    this->timer->setInterval(this->drawTimeout);
     this->timer->setSingleShot(true);
     lineList.clear();
 }
@@ -56,8 +90,8 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
 void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
     QPen pen;
-    pen.setColor(QColor(255,0,0));  //设置画笔为红色
-    pen.setWidth(5);
+    pen.setColor(this->lineColor);  //设置画笔为红色
+    pen.setWidth(this->lineWidth);
     painter.setPen(pen);  //选择画笔
     Line line ;
     foreach(line,this->lineList){

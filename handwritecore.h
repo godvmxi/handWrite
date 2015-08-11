@@ -9,6 +9,7 @@
 #include <QList>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QColor>
 typedef  struct {
     int x ;
     int y;
@@ -23,14 +24,27 @@ class HandWriteCore : public QWidget
     Q_OBJECT
 private :
     long long firstPointTime ;
-    int timeout = 0;
+    int drawTimeout = 0;
     QTimer *timer ;
     Point lastPoint ;
     Point curPoint;
    QList<Line> lineList;
+   int lineWidth;
+   QColor lineColor;
 public:
     HandWriteCore(QWidget *parent = 0);
     ~HandWriteCore();
+
+
+
+    int getLineWidth() const;
+    void setLineWidth(int value);
+
+    int getDrawTimeout() const;
+    void setDrawTimeout(int value);
+
+    QColor getLineColor() const;
+    void setLineColor(const QColor &value);
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);

@@ -31,7 +31,7 @@ private :
     Point lastPoint ;
     Point curPoint;
    QPoint  pointArray[MAX_STROKE_NUM][MAX_POINT_PER_LINE_NUM];
-   int pointArrayTime[MAX_STROKE_NUM][MAX_POINT_PER_LINE_NUM];
+   long long pointArrayTime[MAX_STROKE_NUM][MAX_POINT_PER_LINE_NUM];
    int pointNumInLine[MAX_STROKE_NUM];
    int curStrokeIndex = 0;
    int curPointIndex = 0;

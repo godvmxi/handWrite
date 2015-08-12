@@ -10,6 +10,8 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QColor>
+#define MAX_STROKE_NUM    20
+#define MAX_POINT_PER_LINE_NUM 20
 typedef  struct {
     int x ;
     int y;
@@ -28,7 +30,11 @@ private :
     QTimer *timer ;
     Point lastPoint ;
     Point curPoint;
-   QList<Line> lineList;
+   QPoint  pointArray[MAX_STROKE_NUM][MAX_POINT_PER_LINE_NUM];
+   int pointArrayTime[MAX_STROKE_NUM][MAX_POINT_PER_LINE_NUM];
+   int pointNumInLine[MAX_STROKE_NUM];
+   int curStrokeIndex = 0;
+   int curPointIndex = 0;
    int lineWidth;
    QColor lineColor;
 public:

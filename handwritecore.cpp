@@ -37,6 +37,8 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     this->drawTimeout =  1000;//1s
     this->lineWidth =  5;
     this->lineColor =  QColor(Qt::red) ;
+    /**/
+    this->curStrokeIndex =  0;
     this->timer = new QTimer();
     this->timer->setInterval(this->drawTimeout);
     this->timer->setSingleShot(true);
@@ -46,6 +48,22 @@ HandWriteCore::HandWriteCore(QWidget *parent)
 HandWriteCore::~HandWriteCore()
 {
 
+}
+void HandWriteCore::mousePressEvent(QMouseEvent *event){
+    this->firstPointTime =  QDateTime::currentDateTime().toMSecsSinceEpoch();
+
+    Point p ;
+    p.x  = event->x();
+    p.y = event->y();
+    p.timestamp = 0;
+
+    this->lastPoint = p;
+    this->curPoint = p;
+
+    qDebug()<<"press->"<<p.x <<p.y << p.timestamp;
+    this->lineList[this->curStrokeIndex].clear();
+    this->lineList[this->curStrokeIndex].append(p);
+    this->update();
 }
 void HandWriteCore::mouseMoveEvent(QMouseEvent *event){
    long long pointTime =  QDateTime::currentDateTime().toMSecsSinceEpoch() - this->firstPointTime ;
@@ -60,31 +78,19 @@ void HandWriteCore::mouseMoveEvent(QMouseEvent *event){
     Line  line ;
     line.start = this->lastPoint;
     line.end =  p ;
-    this->lineList.append(line);
+    this->lineList[this->curStrokeIndex].append(line);
     this->lastPoint =  p ;
     this->curPoint = p;
 
 
     qDebug()<<"move ->"<<p.x <<p.y << p.timestamp;
 }
-void HandWriteCore::mousePressEvent(QMouseEvent *event){
-    this->firstPointTime =  QDateTime::currentDateTime().toMSecsSinceEpoch();
 
-    Point p ;
-    p.x  = event->x();
-    p.y = event->y();
-    p.timestamp = 0;
-
-    this->lastPoint = p;
-    this->curPoint = p;
-
-    qDebug()<<"press->"<<p.x <<p.y << p.timestamp;
-    this->repaint();
-}
 void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
 
     qDebug()<<"release->"<<event->x() <<event->y() ;
     qDebug()<<this->lineList.size();
+    this->curStrokeIndex++;
     this->update();
 }
 void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
@@ -94,9 +100,12 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     pen.setWidth(this->lineWidth);
     painter.setPen(pen);  //选择画笔
     Line line ;
-    foreach(line,this->lineList){
+    for(int i = 0 ;i <= this->curStrokeIndex;i++){
+    {
+            foreach(line,this->lineList){
 //        qDebug()<<line.start.x<<line.start.y<<line.end.x<<line.end.y;
-        painter.drawLine(line.start.x,line.start.y,line.end.x,line.end.y); //用该红色画笔画一条线，起点(0,0)，终点(100,100)
+            painter.drawLine(line.start.x,line.start.y,line.end.x,line.end.y); //用该红色画笔画一条线，起点(0,0)，终点(100,100)
+        }
     }
     painter.end(); //结束绘制。绘制时使用的任何资源都被释放。虽然有时不需要调用end()，析构函数将会执行它
 }

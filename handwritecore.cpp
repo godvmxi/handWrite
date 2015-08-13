@@ -35,8 +35,9 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     : QWidget(parent)
 {
     this->drawTimeout =  1000;//1s
-    this->lineWidth =  10;
-    this->lineColor =  QColor(Qt::red) ;
+    this->setLineWidth(10);
+    this->setLineColor(QColor(Qt::red) );
+
     /**/
     this->curStrokeIndex =  0;
     this->timer = new QTimer();
@@ -104,7 +105,7 @@ void HandWriteCore::mouseMoveEvent(QMouseEvent *event){
 void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
 
 
-    this->pointNumPerStroke[this->curStrokeIndex] = this->curPointIndex +1;
+    this->pointNumPerStroke[this->curStrokeIndex] = this->curPointIndex ;
     qDebug()<<"release->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
 
     if(this->curStrokeIndex <  MAX_STROKE_NUM ) {
@@ -120,14 +121,14 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
     QPen pen;
 //    pen.setColor(this->lineColor);  //设置画笔为红色
-//    pen.setWidth(this->lineWidth);
+    pen.setWidth(this->lineWidth);
 
     pen.setColor(QColor(Qt::red));  //设置画笔为红色
-    pen.setWidth(10);
+//    pen.setWidth(10);
     painter.setPen(pen);  //选择画笔
 
     QPoint start ,end ;
-     painter.drawLine(0,0,100,100);
+
 
     for(int i = 0 ;i <= this->curStrokeIndex;i++){
         if ( keyState) {
@@ -143,6 +144,7 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
             end.setY(this->pointPosArray[i][j].y);
             qDebug()<<"draw line-->"<<start<<end;
             painter.drawLine(start ,end );
+//            painter.drawLine(0,0,100,100);
 
 
         }

@@ -11,7 +11,7 @@
 #include <QPaintEvent>
 #include <QColor>
 #define MAX_STROKE_NUM    20
-#define MAX_POINT_PER_LINE_NUM 20
+#define MAX_POINT_PER_STROKE_NUM 40
 typedef  struct {
     int x ;
     int y;
@@ -26,15 +26,17 @@ class HandWriteCore : public QWidget
     Q_OBJECT
 private :
     long long firstPointTime ;
-    int drawTimeout = 0;
+    int drawTimeout ;
     QTimer *timer ;
     Point lastPoint ;
     Point curPoint;
-   QPoint  pointArray[MAX_STROKE_NUM][MAX_POINT_PER_LINE_NUM];
-   long long pointArrayTime[MAX_STROKE_NUM][MAX_POINT_PER_LINE_NUM];
-   int pointNumInLine[MAX_STROKE_NUM];
-   int curStrokeIndex = 0;
-   int curPointIndex = 0;
+   Point  pointPosArray[MAX_STROKE_NUM][MAX_POINT_PER_STROKE_NUM];
+
+   int pointNumPerStroke[MAX_STROKE_NUM];
+   int curStrokeIndex ;
+   int curPointIndex ;
+    int keyState ;
+   //draw feature
    int lineWidth;
    QColor lineColor;
 public:
@@ -51,12 +53,15 @@ public:
 
     QColor getLineColor() const;
     void setLineColor(const QColor &value);
+private slots :
+    void drawTimeoutEvent() ;
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void paintEvent ( QPaintEvent *event ) ;
+
 };
 
 #endif // HandWriteCore_H

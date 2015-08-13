@@ -35,7 +35,7 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     : QWidget(parent)
 {
     this->drawTimeout =  1000;//1s
-    this->lineWidth =  5;
+    this->lineWidth =  10;
     this->lineColor =  QColor(Qt::red) ;
     /**/
     this->curStrokeIndex =  0;
@@ -106,7 +106,7 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
 
     this->pointNumPerStroke[this->curStrokeIndex] = this->curPointIndex +1;
     qDebug()<<"release->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
-    this->keyState = 1;
+
     if(this->curStrokeIndex <  MAX_STROKE_NUM ) {
         this->curStrokeIndex++;
         this->update();
@@ -114,19 +114,25 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
     else {
         qDebug()<<"reach max stroke";
     }
+    this->keyState = 1;
 }
 void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
     QPen pen;
-    pen.setColor(this->lineColor);  //设置画笔为红色
-    pen.setWidth(this->lineWidth);
+//    pen.setColor(this->lineColor);  //设置画笔为红色
+//    pen.setWidth(this->lineWidth);
+
+    pen.setColor(QColor(Qt::red));  //设置画笔为红色
+    pen.setWidth(10);
     painter.setPen(pen);  //选择画笔
 
     QPoint start ,end ;
+     painter.drawLine(0,0,100,100);
 
     for(int i = 0 ;i <= this->curStrokeIndex;i++){
         if ( keyState) {
             qDebug()<<"painter-->"<<curStrokeIndex << this->pointNumPerStroke[i] ;
+
         }
 
         for(int j = 1;j < this->pointNumPerStroke[i];j++){
@@ -135,8 +141,10 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
             start.setY(this->pointPosArray[i][j-1].y );
             end.setX( this->pointPosArray[i][j].x);
             end.setY(this->pointPosArray[i][j].y);
-//            qDebug()<<start<<end;
+            qDebug()<<"draw line-->"<<start<<end;
             painter.drawLine(start ,end );
+
+
         }
     }
     painter.end(); //结束绘制。绘制时使用的任何资源都被释放。虽然有时不需要调用end()，析构函数将会执行它

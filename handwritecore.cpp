@@ -30,6 +30,31 @@ QColor HandWriteCore::getLineColor() const
 void HandWriteCore::setLineColor(const QColor &value)
 {
     lineColor = value;
+
+}
+
+
+
+int HandWriteCore::getWidgetWidth() const
+{
+    return widgetWidth;
+}
+
+void HandWriteCore::setWidgetWidth(int value)
+{
+    widgetWidth = value;
+    this->setFixedWidth(this->widgetWidth);
+}
+
+int HandWriteCore::getWidgetHeight() const
+{
+    return widgetHeight;
+}
+
+void HandWriteCore::setWidgetHeight(int value)
+{
+    widgetHeight = value;
+    this->setFixedHeight(this->widgetHeight);
 }
 HandWriteCore::HandWriteCore(QWidget *parent)
     : QWidget(parent)
@@ -46,6 +71,8 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     this->curStrokeIndex = 0;
     this->setLineWidth(5);
     this->setLineColor(QColor(Qt::red) );
+    this->setWidgetHeight(400);
+    this->setWidgetWidth(400);
 
 }
 

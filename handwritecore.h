@@ -38,6 +38,8 @@ private :
     int keyState ;
    //draw feature
    int lineWidth;
+   int widgetWidth ;
+   int widgetHeight ;
    QColor lineColor;
 public:
     HandWriteCore(QWidget *parent = 0);
@@ -54,6 +56,14 @@ public:
     QColor getLineColor() const;
     void setLineColor(const QColor &value);
     void cleanStroke(void);
+
+
+    int getWidgetWidth() const;
+    void setWidgetWidth(int value);
+
+    int getWidgetHeight() const;
+    void setWidgetHeight(int value);
+
 private slots :
     void drawTimeoutEvent() ;
 

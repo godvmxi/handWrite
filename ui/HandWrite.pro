@@ -19,3 +19,5 @@ HEADERS  += \
     handwritecore.h
 
 FORMS +=
+
+OTHER_FILES +=

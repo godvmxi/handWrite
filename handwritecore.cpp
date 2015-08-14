@@ -35,8 +35,6 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     : QWidget(parent)
 {
     this->drawTimeout =  1000;//1s
-    this->setLineWidth(10);
-    this->setLineColor(QColor(Qt::red) );
 
     /**/
     this->curStrokeIndex =  0;
@@ -46,6 +44,9 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     //init data
     memset(this->pointNumPerStroke,0,sizeof(int)*MAX_POINT_PER_STROKE_NUM) ;
     this->curStrokeIndex = 0;
+    this->setLineWidth(5);
+    this->setLineColor(QColor(Qt::red) );
+
 }
 
 HandWriteCore::~HandWriteCore()
@@ -120,10 +121,10 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
 void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
     QPen pen;
-//    pen.setColor(this->lineColor);  //设置画笔为红色
+    pen.setColor(this->lineColor);  //设置画笔为红色
     pen.setWidth(this->lineWidth);
-
-    pen.setColor(QColor(Qt::red));  //设置画笔为红色
+    qDebug()<<this->lineColor ;
+    //pen.setColor(QColor(Qt::red));  //设置画笔为红色
 //    pen.setWidth(10);
     painter.setPen(pen);  //选择画笔
 
@@ -142,7 +143,7 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
             start.setY(this->pointPosArray[i][j-1].y );
             end.setX( this->pointPosArray[i][j].x);
             end.setY(this->pointPosArray[i][j].y);
-            qDebug()<<"draw line-->"<<start<<end;
+//            qDebug()<<"draw line-->"<<start<<end;
             painter.drawLine(start ,end );
 //            painter.drawLine(0,0,100,100);
 
@@ -151,5 +152,10 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     }
     painter.end(); //结束绘制。绘制时使用的任何资源都被释放。虽然有时不需要调用end()，析构函数将会执行它
 }
-
+ void HandWriteCore::cleanStroke(void){
+    this->curPointIndex = 0;
+     for(int i =0;i<MAX_STROKE_NUM;i++){
+         pointNumPerStroke[i] = 0;
+     }
+ }
 

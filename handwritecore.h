@@ -53,6 +53,7 @@ public:
 
     QColor getLineColor() const;
     void setLineColor(const QColor &value);
+    void cleanStroke(void);
 private slots :
     void drawTimeoutEvent() ;
 

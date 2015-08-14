@@ -17,11 +17,15 @@ def select_recongnizer_models(name):
 def get_all_availabke_models():
     all_models = Recognizer.get_all_available_models()
     
-    pprint.pprint(all_models)
+##    pprint.pprint(all_models)
     for r_name, model_name, meta in all_models :
+        print(r_name)
+        print(model_name)
+        print(meta)
+    return all_models
     
 if __name__ == "__main__": 
-    print()
+##    print()
     get_all_availabke_models()
     sys.exit()
     while 1:

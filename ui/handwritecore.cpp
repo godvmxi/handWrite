@@ -74,6 +74,7 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     this->setWidgetHeight(400);
     this->setWidgetWidth(400);
 
+
 }
 
 HandWriteCore::~HandWriteCore()
@@ -118,7 +119,7 @@ void HandWriteCore::mouseMoveEvent(QMouseEvent *event){
 
   this->pointNumPerStroke[this->curStrokeIndex]++;
 
-   qDebug()<<"move->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
+//   qDebug()<<"move->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
 
 
    if(this->curPointIndex < MAX_POINT_PER_STROKE_NUM){
@@ -144,13 +145,14 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
         qDebug()<<"reach max stroke";
     }
     this->keyState = 1;
+//        this->toXml();
 }
 void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
     QPen pen;
     pen.setColor(this->lineColor);  //设置画笔为红色
     pen.setWidth(this->lineWidth);
-    qDebug()<<this->lineColor ;
+//    qDebug()<<this->lineColor ;
     //pen.setColor(QColor(Qt::red));  //设置画笔为红色
 //    pen.setWidth(10);
     painter.setPen(pen);  //选择画笔
@@ -160,7 +162,7 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
 
     for(int i = 0 ;i <= this->curStrokeIndex;i++){
         if ( keyState) {
-            qDebug()<<"painter-->"<<curStrokeIndex << this->pointNumPerStroke[i] ;
+//            qDebug()<<"painter-->"<<curStrokeIndex << this->pointNumPerStroke[i] ;
 
         }
 
@@ -185,4 +187,23 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
          pointNumPerStroke[i] = 0;
      }
  }
+bool HandWriteCore::toXml(void){
 
+    QString Temp ;
+    qDebug()<<"1111";
+    this->strokesXmlString.append("");
+    qDebug()<<this->strokesXmlString;
+    qDebug()<<"1111";
+    Temp =  QString(tr("<strokes width=%1 height=%2>") ).arg(this->getWidgetWidth()).arg(this->getWidgetHeight());
+    this->strokesXmlString  =  Temp;
+    qDebug()<<"1111";
+//    for(int i = 0 ;i <= this->curStrokeIndex;i++){
+//        for(int j = 1;j < this->pointNumPerStroke[i];j++){
+
+//        }
+//    }
+    Temp =  QString(tr("</strokes>") );
+    this->strokesXmlString .append( Temp );
+    qDebug()<<this->strokesXmlString ;
+    return true;
+}

@@ -10,6 +10,7 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QColor>
+#include <QString>
 #define MAX_STROKE_NUM    20
 #define MAX_POINT_PER_STROKE_NUM 40
 typedef  struct {
@@ -40,7 +41,10 @@ private :
    int lineWidth;
    int widgetWidth ;
    int widgetHeight ;
+   QString strokesXmlString ;
+
    QColor lineColor;
+
 public:
     HandWriteCore(QWidget *parent = 0);
     ~HandWriteCore();
@@ -63,7 +67,7 @@ public:
 
     int getWidgetHeight() const;
     void setWidgetHeight(int value);
-
+    bool toXml(void);
 private slots :
     void drawTimeoutEvent() ;
 

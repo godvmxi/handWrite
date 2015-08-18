@@ -29,4 +29,5 @@
 *.user
 *.pyc
 *.swp
+*.o
 *.py~

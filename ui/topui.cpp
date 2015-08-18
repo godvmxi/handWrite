@@ -12,30 +12,19 @@ TopUI::TopUI(QWidget *parent) :
 
     this->charTable = new CharTable();
      this->charTable->setFixedHeight(100);
-//    this->charTable->show();
-    this->charTable->setPalette(palette);
 
 
     this->controlPanel = new QWidget();
     this->controlPanel->setFixedWidth(200);
-//    this->controlPanel->show();
-    this->controlPanel->setPalette(palette);
-//     return;
 
 
 
-
-
-
-
-    qDebug()<<"2222";
-//    return ;
     this->hwArea = new HandWriteCore();
     this->hwArea->setFixedWidth(400);
     this->hwArea->setFixedHeight(400);
 
     qDebug()<<"3333";
-//    return ;
+
     this->widgetSubBottom = new QWidget();
 
 

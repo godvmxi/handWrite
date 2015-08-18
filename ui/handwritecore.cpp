@@ -73,12 +73,9 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     this->timer = new QTimer();
     this->timer->setInterval(this->drawTimeout);
     this->timer->setSingleShot(true);
- return ;
-
-
-
-
-
+    QPalette palette;
+    palette.setColor(QPalette::Background, QColor(192,253,123));
+    this->setPalette(palette);
 }
 
 HandWriteCore::~HandWriteCore()

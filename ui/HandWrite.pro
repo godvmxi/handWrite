@@ -13,11 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    handwritecore.cpp
+    handwritecore.cpp \
+    topui.cpp \
+    chartable.cpp
 
 HEADERS  += \
-    handwritecore.h
+    handwritecore.h \
+    topui.h \
+    chartable.h
 
-FORMS +=
-
-OTHER_FILES +=

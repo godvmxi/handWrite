@@ -145,7 +145,7 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
         qDebug()<<"reach max stroke";
     }
     this->keyState = 1;
-//        this->toXml();
+    emit  this->add_strokes( this->getStrokesXmlString() );
 }
 void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
@@ -187,23 +187,33 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
          pointNumPerStroke[i] = 0;
      }
  }
-bool HandWriteCore::toXml(void){
+QString HandWriteCore::getStrokesXmlString(void){
 
     QString Temp ;
+    QString result;
     qDebug()<<"1111";
-    this->strokesXmlString.append("");
-    qDebug()<<this->strokesXmlString;
-    qDebug()<<"1111";
-    Temp =  QString(tr("<strokes width=%1 height=%2>") ).arg(this->getWidgetWidth()).arg(this->getWidgetHeight());
-    this->strokesXmlString  =  Temp;
-    qDebug()<<"1111";
-//    for(int i = 0 ;i <= this->curStrokeIndex;i++){
-//        for(int j = 1;j < this->pointNumPerStroke[i];j++){
 
-//        }
-//    }
+
+    qDebug()<<result;
+
+    Temp =  QString(tr("<strokes width=%1 height=%2>") ).arg(this->getWidgetWidth()).arg(this->getWidgetHeight());
+    result  =  Temp;
+
+    for(int i = 0 ;i <= this->curStrokeIndex;i++){
+        if(this->pointNumPerStroke[i] == 0)
+            continue;
+        Temp =  QString(tr("<stroke>") );
+         result .append( Temp );
+        for(int j = 0;j < this->pointNumPerStroke[i];j++){
+            Point *p = &pointPosArray[i][j];
+            Temp =  QString(tr("<point x=%1 y=%2 timestamp=%3 />") ).arg(p->x).arg(p->y).arg(p->timestamp);
+             result .append( Temp );
+        }
+        Temp =  QString(tr("</stroke>") );
+         result .append( Temp );
+    }
     Temp =  QString(tr("</strokes>") );
-    this->strokesXmlString .append( Temp );
-    qDebug()<<this->strokesXmlString ;
-    return true;
+    result .append( Temp );
+//    qDebug()<<result ;
+    return result;
 }

@@ -41,7 +41,7 @@ private :
    int lineWidth;
    int widgetWidth ;
    int widgetHeight ;
-   QString strokesXmlString ;
+
 
    QColor lineColor;
 
@@ -67,7 +67,7 @@ public:
 
     int getWidgetHeight() const;
     void setWidgetHeight(int value);
-    bool toXml(void);
+    QString getStrokesXmlString(void);
 private slots :
     void drawTimeoutEvent() ;
 
@@ -76,7 +76,8 @@ protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void paintEvent ( QPaintEvent *event ) ;
-
+signals :
+    void add_strokes(QString strokes);
 };
 
 #endif // HandWriteCore_H

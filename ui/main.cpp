@@ -1,11 +1,11 @@
-#include "handwritecore.h"
+#include "topui.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    HandWriteCore w;
-    w.show();
+    TopUI ui;
+    ui.show();
 
     return a.exec();
 }

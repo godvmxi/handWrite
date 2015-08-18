@@ -22,8 +22,6 @@ CharTable::CharTable(QWidget *parent,int layoutType ,int displayChar ,int maxCha
     for(int i = 0; i< this->displayCharNum;i++){
          this->layout->addWidget(this->charList[i] );
     }
-//    qDebug("????");
-//    return ;
     this->setLayout(this->layout);
 }
 

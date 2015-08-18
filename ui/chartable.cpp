@@ -1,17 +1,18 @@
 #include "chartable.h"
 
-CharTable::CharTable(int layoutType ,int displayChar ,int maxChar,QWidget *parent ) :
+CharTable::CharTable(QWidget *parent,int layoutType ,int displayChar ,int maxChar ) :
     QWidget(parent)
 {
     if (layoutType == 1 ){
-        this->layout = (QBoxLayout *) new QHBoxLayout ;
+        this->layout = (QBoxLayout *) new QHBoxLayout() ;
     }
     else if (layoutType == 2 ){
-        this->layout = (QBoxLayout *) new QVBoxLayout ;
+        this->layout = (QBoxLayout *) new QVBoxLayout() ;
     }
     else{
         return ;
     }
+//
     this->displayCharNum = displayChar;
     this->maxCharNumber = maxChar;
     qDebug()<<layoutType<<this->displayCharNum<<this->maxCharNumber;
@@ -21,6 +22,8 @@ CharTable::CharTable(int layoutType ,int displayChar ,int maxChar,QWidget *paren
     for(int i = 0; i< this->displayCharNum;i++){
          this->layout->addWidget(this->charList[i] );
     }
+//    qDebug("????");
+//    return ;
     this->setLayout(this->layout);
 }
 

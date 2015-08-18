@@ -61,18 +61,22 @@ HandWriteCore::HandWriteCore(QWidget *parent)
 {
     this->drawTimeout =  1000;//1s
 
+
     /**/
     this->curStrokeIndex =  0;
-    this->timer = new QTimer();
-    this->timer->setInterval(this->drawTimeout);
-    this->timer->setSingleShot(true);
-    //init data
-    memset(this->pointNumPerStroke,0,sizeof(int)*MAX_POINT_PER_STROKE_NUM) ;
     this->curStrokeIndex = 0;
     this->setLineWidth(5);
     this->setLineColor(QColor(Qt::red) );
-    this->setWidgetHeight(400);
-    this->setWidgetWidth(400);
+    for(int i = 0 ;i <MAX_STROKE_NUM;i++ ){
+        this->pointNumPerStroke[i] = 0;
+    }
+    this->timer = new QTimer();
+    this->timer->setInterval(this->drawTimeout);
+    this->timer->setSingleShot(true);
+ return ;
+
+
+
 
 
 }

@@ -6,26 +6,38 @@ TopUI::TopUI(QWidget *parent) :
 
 //    charTable->show();
 
-//    this->controlPanel = new QWidget();
+    QPalette palette;
+    palette.setColor(QPalette::Background, QColor(192,253,123));
+
 
     this->charTable = new CharTable();
-    this->charTable->show();
-        return ;
-    QWidget *charWidget  = new QWidget();
+     this->charTable->setFixedHeight(100);
+//    this->charTable->show();
+    this->charTable->setPalette(palette);
+
+
+    this->controlPanel = new QWidget();
+    this->controlPanel->setFixedWidth(200);
+//    this->controlPanel->show();
+    this->controlPanel->setPalette(palette);
+//     return;
+
+
+
+
 
 
 
     qDebug()<<"2222";
 //    return ;
     this->hwArea = new HandWriteCore();
-    qDebug()<<"3333";
-    return ;
-    this->widgetSubBottom = new QWidget();
-    QPalette palette;
-    palette.setColor(QPalette::Background, QColor(192,253,123));
+    this->hwArea->setFixedWidth(400);
+    this->hwArea->setFixedHeight(400);
 
-    this->charTable->setPalette(palette);
-    this->controlPanel->setPalette(palette);
+    qDebug()<<"3333";
+//    return ;
+    this->widgetSubBottom = new QWidget();
+
 
     this->hBoxLayoutSubBottom = new QHBoxLayout();
     this->vBoxLayoutMain = new QVBoxLayout();
@@ -38,8 +50,9 @@ TopUI::TopUI(QWidget *parent) :
 
 
 
- //   this->vBoxLayoutMain->addWidget(this->charTable);
-    this->vBoxLayoutMain->addWidget(charWidget);
+
+    this->vBoxLayoutMain->addWidget(this->charTable);
+
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);
 

@@ -13,7 +13,7 @@ class CharTable : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CharTable(int layoutType =  1,int displayChar = 5,int maxChar=15,QWidget *parent = 0);
+    explicit CharTable(QWidget *parent = 0,int layoutType =  1,int displayChar = 5,int maxChar=15);
     bool appendChar(QString c);
     void clear (void) ;
 

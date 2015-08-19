@@ -1,4 +1,5 @@
 #include "topui.h"
+#include "socket.h"
 
 TopUI::TopUI(QWidget *parent) :
     QWidget(parent)
@@ -44,5 +45,7 @@ TopUI::TopUI(QWidget *parent) :
 
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);
+
+    this->socket = new Socket();
 
 }

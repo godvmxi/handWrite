@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp \
     handwritecore.cpp \
     topui.cpp \
-    chartable.cpp
+    chartable.cpp \
+    socket.cpp
 
 HEADERS  += \
     handwritecore.h \
     topui.h \
-    chartable.h
+    chartable.h \
+    socket.h
 

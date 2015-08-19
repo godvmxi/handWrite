@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QDebug>
+#include "socket.h"
 
 class TopUI : public QWidget
 {
@@ -25,6 +26,8 @@ private :
     QVBoxLayout *vBoxLayoutMain;
     QHBoxLayout *hBoxLayoutSubBottom;
     QWidget *widgetSubBottom;
+
+    Socket *socket;
 
 };
 

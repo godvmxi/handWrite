@@ -5,15 +5,7 @@ import socket, traceback
 import sys
 import pprint
 import SocketServer
-from SocketServer import TCPServer,ThreadingMixIn,StreamRequestHandler
-class Server(ThreadingMixIn,TCPServer):
-    pass
-class Handler(StreamRequestHandler):
-    def handle(self):
-        addr=self.request.getpeername()
-        data=self.request
-        print "got connection from",addr
-        self.wfile.write("connected")
+
 
 
 
@@ -69,7 +61,24 @@ def get_all_availabke_models():
 
 def select_recongnizer_models(name):
     pass
-    
+
+
+from SocketServer import TCPServer,ThreadingMixIn,StreamRequestHandler
+class Server(ThreadingMixIn,TCPServer):
+    pass
+class Handler(StreamRequestHandler):
+    def handle(self):
+        addr=self.request.getpeername()
+        data=self.request
+        print "got connection from",addr
+##        self.wfile.write("connected")
+        while True:  
+            data = self.request.recv(1024)  
+            if not data:   
+                break  
+            print "RECV from ", self.client_address[0]  ,data
+            self.request.send("ack")
+            
 if __name__ == "__main__": 
     server=Server(('',port),Handler)
     server.serve_forever()

@@ -16,8 +16,13 @@ public:
     explicit TopUI(QWidget *parent = 0);
 
 signals:
+    void queryHandWriteCoreCmd(QString cmd) ;
 
 public slots:
+
+private slots :
+    void handleDrawSignal(QString xml) ;
+
 
 private :
     HandWriteCore *hwArea;

@@ -47,5 +47,17 @@ TopUI::TopUI(QWidget *parent) :
     this->setLayout(this->vBoxLayoutMain);
 
     this->socket = new Socket();
+    connect(this->hwArea,
+            SIGNAL(add_strokes(QString)),
+            this,
+            SLOT(handleDrawSignal(QString))
+            );
 
 }
+ void TopUI::handleDrawSignal(QString xml) {
+//        qDebug()<<"receive strokes ->"<<xml;
+        QString cmd = QString("<action type= 0 > %1 </action>").arg(xml);
+        qDebug()<<"action ->" << cmd;
+        this->socket->socketSendMessage(cmd);
+        emit queryHandWriteCoreCmd(cmd);
+ }

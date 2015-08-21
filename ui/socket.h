@@ -2,9 +2,11 @@
 #define SOCKET_H
 
 #include <QObject>
-#include <QTcpSocket>
+#include <QUdpSocket>
 #include <QString>
  #include <QHostAddress>
+#include <QTimer>
+#include <QMessageBox>
 
 class Socket : public QObject
 {
@@ -20,19 +22,18 @@ public:
 signals:
     void socketReceiveData(QString msg);
 private slots :
-    void socketStateChangedEvent(QAbstractSocket::SocketState socketState);
     void socketReadData();
 public slots:
-//    void socketDisconnectEvent();
-//    void socketConnectEvent();
+
 
     void socketSendMessage(QString msg);
 
 private :
-        QTcpSocket *tcp_socket ;
+        QUdpSocket *udpSocket ;
         QString host;
         quint16 port;
-
+        QHostAddress * hostAddress ;
+        QTimer *timer ;
 
 };
 

@@ -5,20 +5,28 @@ Socket::Socket(QObject *parent ,QString host ,quint16  port) :
 {
         this->host =  host ;
         this->port =  port ;
-        qDebug()<<"tcp client -> "<<this->host <<this->port;
-        this->tcp_socket = new QTcpSocket(this);
 
-        this->tcp_socket->connectToHost(QHostAddress(this->host),this->port);
-        connect(this->tcp_socket,
-                SIGNAL(stateChanged(QAbstractSocket::SocketState ) ),
-                this,
-                SLOT(socketStateChangedEvent(QAbstractSocket::SocketState) )
-                );
-        connect (this->tcp_socket ,
+        qDebug()<<"udp client -> "<<this->host <<this->port;
+        this->hostAddress = new QHostAddress(this->host);
+        this->udpSocket = new QUdpSocket(this);
+        if( ! this->udpSocket->bind(this->port+1)   ){
+            qDebug()<<"udp bind error";
+            //QMessageBox::information(this,"error","bind fail");
+            return ;
+        }
+
+
+
+        connect (this->udpSocket ,
                  SIGNAL(readyRead()) ,
                  this,
                  SLOT(socketReadData())
                  );
+
+        this->socketSendMessage("hello udp ");
+
+
+
 }
 QString Socket::getServerInfo() const
 {
@@ -41,35 +49,18 @@ void Socket::setServerInfo(const QString &host,const quint16 &port)
     this->port =  port ;
 }
 
- void Socket::socketStateChangedEvent(QAbstractSocket::SocketState socketState){
-//    qDebug()<<"status changed" <<socketState ;
 
-    switch (socketState ) {
-    case QAbstractSocket::UnconnectedState  :
-        //may try reconnect
-        break;
-     case  QAbstractSocket::ConnectedState :
-        //can send data
-        this->socketSendMessage("hello");
-        break;
-      case QAbstractSocket::ClosingState  :
-        //system shut down ?
-        break;
-       default :
-        break;
-    }
- }
 void Socket::socketSendMessage(QString msg){
-    QByteArray block;
-    QDataStream out(&block,QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_8);
-    out<<msg;
-    this->tcp_socket->write(block);
+    QByteArray data = msg.toUtf8();
+    this->udpSocket->writeDatagram(data,data.size(), *this->hostAddress,this->port);
 }
 void Socket::socketReadData(){
 
-    QByteArray block = this->tcp_socket->readAll();
-    QString result ;
-    result.append(block);
-    qDebug()<<"receive ack ->"<<result.count()<<result;
+   if ( !  this->udpSocket->hasPendingDatagrams() )
+       return;
+    QByteArray datagram;
+    datagram.resize(udpSocket->pendingDatagramSize());//设置字符数组的大小 返回第一次监听数 据大小
+    udpSocket->readDatagram(datagram.data(),datagram.length());//读数据
+    QString message = datagram.data();//把数据转换成字符串
+    qDebug()<<"receive ->"<<message;
 }

@@ -49,19 +49,38 @@ def wait_tcp_data(server):
         print("ack-->")
         conn.send("ack++++++++++++")
 
-def get_all_availabke_models():
-    all_models = Recognizer.get_all_available_models()
-    
-##    pprint.pprint(all_models)
-    for r_name, model_name, meta in all_models :
-        print(r_name)
-        print(model_name)
-        print(meta)
-    return all_models
+
+
 
 def select_recongnizer_models(name):
     pass
 
+
+
+class RecognizerHandler() :
+    def __init__(self):
+        pass
+    def get_selected_model(self):
+        pass
+    def set_selected_model(self,i):
+        pass
+    def recognize(self,writing,n=10):
+        """
+        
+        """
+        pass
+    @staticmethod
+    def get_all_availabke_models():
+        all_models = Recognizer.get_all_available_models()
+        for r_name, model_name, meta in all_models :
+            print(r_name)
+            print(model_name)
+            print(meta)
+        return all_models
+        
+class     QueryParser():
+    def __init(self):
+        pass
 
 from SocketServer import TCPServer,ThreadingMixIn,StreamRequestHandler
 class Server(ThreadingMixIn,TCPServer):
@@ -78,14 +97,35 @@ class Handler(StreamRequestHandler):
                 break  
             print "RECV from ", self.client_address[0]  ,data
             self.request.send("ack")
-            
+
+
+import SocketServer
+class RecognizerServer(SocketServer.BaseRequestHandler):
+    """
+    The RequestHandler class for our server.
+ 
+    It is instantiated once per connection to the server, and must
+    override the handle() method to implement communication to the
+    client.
+    """
+ 
+    def handle(self):
+        # self.request is the TCP socket connected to the client
+        data = self.request[0].strip()
+        socket = self.request[1]
+        print socket,data
+
+        socket.sendto("ack",self.client_address)
+ 
+
+    
 if __name__ == "__main__": 
-    server=Server(('',port),Handler)
+    HOST, PORT = "localhost", 20000
+        # Create the server, binding to localhost on port 9999
+    server = SocketServer.UDPServer((HOST, PORT), RecognizerServer)
+
+    # Activate the server; this will keep running until you
+    # interrupt the program with Ctrl-C
     server.serve_forever()
-    sys.exit(1)
-##    print()
-    get_all_availabke_models()
-##    sys.exit()
-    server =  create_tcp_server(port)
-    wait_tcp_data(server)
+
     

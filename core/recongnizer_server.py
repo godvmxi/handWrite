@@ -56,6 +56,32 @@ class RecognizerCore(Recognizer) :
         pass
 
 
+
+class RecognizerHandler() :
+    def __init__(self):
+        pass
+    def get_selected_model(self):
+        pass
+    def set_selected_model(self,i):
+        pass
+    def recognize(self,writing,n=10):
+        """
+        
+        """
+        pass
+    @staticmethod
+    def get_all_availabke_models():
+        all_models = Recognizer.get_all_available_models()
+        for r_name, model_name, meta in all_models :
+            print(r_name)
+            print(model_name)
+            print(meta)
+        return all_models
+        
+class     QueryParser():
+    def __init(self):
+        pass
+
 from SocketServer import TCPServer,ThreadingMixIn,StreamRequestHandler
 
 

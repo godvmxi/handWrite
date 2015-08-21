@@ -56,7 +56,7 @@ TopUI::TopUI(QWidget *parent) :
 }
  void TopUI::handleDrawSignal(QString xml) {
 //        qDebug()<<"receive strokes ->"<<xml;
-        QString cmd = QString("<action type= 0 > %1 </action>").arg(xml);
+        QString cmd = QString("<action type= %1 > %2 </action>").arg(CMD_QUERY_STROKES).arg(xml);
         qDebug()<<"action ->" << cmd;
         this->socket->socketSendMessage(cmd);
         emit queryHandWriteCoreCmd(cmd);

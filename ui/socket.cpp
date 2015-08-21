@@ -63,4 +63,5 @@ void Socket::socketReadData(){
     udpSocket->readDatagram(datagram.data(),datagram.length());//读数据
     QString message = datagram.data();//把数据转换成字符串
     qDebug()<<"receive ->"<<message;
+    emit socketServerAck(message);
 }

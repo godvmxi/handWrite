@@ -22,5 +22,6 @@ HEADERS  += \
     handwritecore.h \
     topui.h \
     chartable.h \
-    socket.h
+    socket.h \
+    common.h
 

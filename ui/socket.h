@@ -7,6 +7,7 @@
  #include <QHostAddress>
 #include <QTimer>
 #include <QMessageBox>
+#include <common.h>
 
 class Socket : public QObject
 {
@@ -20,7 +21,7 @@ public:
     void setServerInfo(const QString &host,const quint16 &port);
 
 signals:
-    void socketReceiveData(QString msg);
+    void socketServerAck(QString msg);
 private slots :
     void socketReadData();
 public slots:

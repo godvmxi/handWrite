@@ -17,13 +17,13 @@ def select_recongnizer_models(name):
 
 class RecognizerCore(Recognizer) :
 
-    def init_recognizer(self):
+    def init_recognizer(self,recognizer='zinnia'):
         recognizers = Recognizer.get_available_recognizers()
         print "Available recognizers", recognizers,type(recognizers)
         
         for temp in recognizers :
             pprint.pprint(temp)
-        recognizer_name = "zinnia"
+        recognizer_name = recognizer
         if not recognizer_name in recognizers:
             raise Exception, "Not an available recognizer"
 
@@ -43,14 +43,20 @@ class RecognizerCore(Recognizer) :
             print meta
 
         
-        print "Available models", models
+        print "\nAvailable models", models,type(models)
+        print (models['Simplified Chinese']['shortname'])
         model = "Simplified Chinese"
         if not model in models:
             raise Exception, "Not an available model"
 
-        self.recognizer.set_model(model)
+        print self.recognizer.set_model(model)
 
-        pass
+    def parse_xml(xml_file) :
+        char = Character()
+        char.read(xml_file)
+        writing = char.get_writing()
+        print "\n".join(["%s %f" % (c,s) for c,s in recognizer.recognize(writing)])
+
 
     def  executeCmd(self,cmd):
         pass
@@ -110,6 +116,8 @@ class RecognizerServer(SocketServer.BaseRequestHandler):
 if __name__ == "__main__": 
     reg =  RecognizerCore()
     reg.init_recognizer()
+    print(sys.argv[0])
+    reg.parse_xml(sys.argv[0])
     sys.exit(1)
     HOST, PORT = "localhost", 20000
         # Create the server, binding to localhost on port 9999

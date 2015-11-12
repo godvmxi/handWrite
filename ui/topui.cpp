@@ -8,16 +8,17 @@ TopUI::TopUI(QWidget *parent) :
 //    charTable->show();
 
     QPalette palette;
+
     palette.setColor(QPalette::Background, QColor(192,253,123));
 
 
     this->charTable = new CharTable();
      this->charTable->setFixedHeight(100);
 
-
+qDebug()<<"2222";
     this->controlPanel = new QWidget();
     this->controlPanel->setFixedWidth(200);
-
+qDebug()<<"2222";
 
 
     this->hwArea = new HandWriteCore();
@@ -59,5 +60,5 @@ TopUI::TopUI(QWidget *parent) :
         QString cmd = QString("<action type= %1 > %2 </action>").arg(CMD_QUERY_STROKES).arg(xml);
         qDebug()<<"action ->" << cmd;
         this->socket->socketSendMessage(cmd);
-        emit queryHandWriteCoreCmd(cmd);
+  //      emit queryHandWriteCoreCmd(cmd);
  }

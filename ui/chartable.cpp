@@ -17,10 +17,11 @@ CharTable::CharTable(QWidget *parent,int layoutType ,int displayChar ,int maxCha
     this->maxCharNumber = maxChar;
     qDebug()<<layoutType<<this->displayCharNum<<this->maxCharNumber;
     for(int i =  0; i<this->maxCharNumber;i++){
-         this->charList[i] =  new QPushButton("test");
+         this->charList[i] =  new QPushButton();
+        this->charList[i]->setText("test");
     }
     for(int i = 0; i< this->displayCharNum;i++){
-         this->layout->addWidget(this->charList[i] );
+        this->layout->addWidget(this->charList[i] );
     }
     this->setLayout(this->layout);
 }

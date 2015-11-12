@@ -31,3 +31,4 @@
 *.swp
 *.o
 *.py~
+build*/

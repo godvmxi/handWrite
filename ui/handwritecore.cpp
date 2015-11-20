@@ -271,7 +271,6 @@ int HandWriteCore::demo(void){
     character->add(7, 189, 227);
     character->add(8, 111, 257);
     character->add(8, 189, 245);
-
     {
       zinnia::Result *result = recognizer->classify(*character, 10);
       if (!result) {

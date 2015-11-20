@@ -2,14 +2,26 @@
 #include <QApplication>
 #include "zinnia.h"
 #include<QDebug>
-
+#include <QTextCodec>
+#include <iostream>
+#include <string.h>
+using namespace std;
 static const char *input =
   "(character (width 1000)(height 1000)"
   "(strokes ((243 273)(393 450))((700 253)(343 486)(280 716)(393 866)(710 880))))";
 int main(int argc, char *argv[])
 {
+    qDebug()<<QTextCodec::codecForLocale();
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("BIG-5"));
+           QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+           QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+
+
+//    QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
+//    QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
+//    QTextCodec::setCodecForCStrings(  QTextCodec::codecForLocale())  ;
     zinnia::Recognizer *recognizer = zinnia::Recognizer::create();
-    if (!recognizer->open("/usr/share/tegaki/models/zinnia/handwriting-ja.model")) {
+    if (!recognizer->open("/nfs/dev/HandWrite/model/handwriting-ja.model")) {
       qDebug()<< recognizer->what() ;
       return -1;
     }
@@ -28,6 +40,7 @@ int main(int argc, char *argv[])
       }
       for (size_t i = 0; i < result->size(); ++i) {
         qDebug()<< result->value(i) << "\t" << result->score(i) ;
+        break;
       }
       delete result;
     }
@@ -62,7 +75,18 @@ int main(int argc, char *argv[])
          return -1;
       }
       for (size_t i = 0; i < result->size(); ++i) {
-        qDebug() << result->value(i) << "\t" << result->score(i) ;
+          QString temp  = QString::fromLocal8Bit(result->value(i) );
+        //  temp.append(result->value((i)));
+        unsigned char * tmp = (unsigned char *)result->value(i);
+        QString  test = QString().sprintf("\\%02X\\%0X\\%02X",tmp[0],tmp[1],tmp[2]);
+    //    QString  test = QString().sprintf("\\%d\\%d\\%d",tmp[0],tmp[1],tmp[2]);
+
+
+
+         qDebug() <<"--->"<<temp<<"  --> "<< result->value(i) << "\t" << result->score(i) ;
+        std::cerr <<result->value(i)<<std::endl;
+         break;
+
       }
       delete result;
     }

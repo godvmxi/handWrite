@@ -22,10 +22,10 @@ qDebug()<<"2222";
 
 
     this->hwArea = new HandWriteCore();
-    this->hwArea->setFixedWidth(400);
-    this->hwArea->setFixedHeight(400);
+    this->hwArea->setFixedWidth(300);
+    this->hwArea->setFixedHeight(300);
 
-    qDebug()<<"3333";
+
 
     this->widgetSubBottom = new QWidget();
 
@@ -46,13 +46,8 @@ qDebug()<<"2222";
 
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);
+    this->hwArea->demo();
 
-    this->socket = new Socket();
-    connect(this->hwArea,
-            SIGNAL(add_strokes(QString)),
-            this,
-            SLOT(handleDrawSignal(QString))
-            );
 
 }
  void TopUI::handleDrawSignal(QString xml) {

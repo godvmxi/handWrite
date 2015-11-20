@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 //    QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 //    QTextCodec::setCodecForCStrings(  QTextCodec::codecForLocale())  ;
     zinnia::Recognizer *recognizer = zinnia::Recognizer::create();
-    if (!recognizer->open("/nfs/dev/HandWrite/model/handwriting-ja.model")) {
+    if (!recognizer->open("/nfs/dev/HandWrite/model/handwriting-zh_CN.model")) {
       qDebug()<< recognizer->what() ;
       return -1;
     }

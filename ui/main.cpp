@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
       }
       for (size_t i = 0; i < result->size(); ++i) {
         qDebug()<< result->value(i) << "\t" << result->score(i) ;
-        break;
       }
       delete result;
     }
@@ -76,16 +75,14 @@ int main(int argc, char *argv[])
       }
       for (size_t i = 0; i < result->size(); ++i) {
           QString temp  = QString::fromLocal8Bit(result->value(i) );
-        //  temp.append(result->value((i)));
         unsigned char * tmp = (unsigned char *)result->value(i);
         QString  test = QString().sprintf("\\%02X\\%0X\\%02X",tmp[0],tmp[1],tmp[2]);
-    //    QString  test = QString().sprintf("\\%d\\%d\\%d",tmp[0],tmp[1],tmp[2]);
+
 
 
 
          qDebug() <<"--->"<<temp<<"  --> "<< result->value(i) << "\t" << result->score(i) ;
         std::cerr <<result->value(i)<<std::endl;
-         break;
 
       }
       delete result;

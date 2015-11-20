@@ -40,9 +40,8 @@ qDebug()<<"2222";
 
 
 
-
-
-//    this->vBoxLayoutMain->addWidget(this->charTable);
+    this->lineEditChar =  new QLineEdit();
+    this->vBoxLayoutMain->addWidget(this->lineEditChar);
 
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);

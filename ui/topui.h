@@ -8,6 +8,7 @@
 #include <QHBoxLayout>
 #include <QDebug>
 #include "socket.h"
+ #include <QLineEdit>
 
 class TopUI : public QWidget
 {
@@ -32,7 +33,7 @@ private :
     QHBoxLayout *hBoxLayoutSubBottom;
     QWidget *widgetSubBottom;
 
-    Socket *socket;
+    QLineEdit *lineEditChar ;
 
 };
 

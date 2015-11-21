@@ -23,6 +23,7 @@ public:
     int getWidth();
     int getHeight();
     void addStroke(int id ,QVector<QPoint> pointList) ;
+    void demo();
 
 
 signals:

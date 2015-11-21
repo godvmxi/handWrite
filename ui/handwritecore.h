@@ -74,7 +74,7 @@ public:
     void setWidgetHeight(int value);
     QString getStrokesXmlString(void);
 
-     int demo(void);
+
 private slots :
     void drawTimeoutEvent() ;
 

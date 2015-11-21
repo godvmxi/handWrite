@@ -45,7 +45,7 @@ qDebug()<<"2222";
 
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);
-    this->hwArea->demo();
+
 
 
 }

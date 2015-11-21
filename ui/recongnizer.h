@@ -30,6 +30,7 @@ signals:
     void notifyRecongnizerResult(QStringList result);
 
 public slots:
+    void addStrokeSlot(int id ,QVector<QPoint> pointList);
 
 private :
     QString model ;

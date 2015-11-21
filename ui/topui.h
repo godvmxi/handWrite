@@ -22,7 +22,7 @@ signals:
     void queryHandWriteCoreCmd(QString cmd) ;
 
 public slots:
-    void getRecongnizerResult(QStringList result) ;
+    void updateRecongnizerResult(QStringList result) ;
 private slots :
     void handleDrawSignal(QString xml) ;
 

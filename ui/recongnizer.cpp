@@ -51,6 +51,7 @@ void Recongnizer::addStroke(int id ,QVector<QPoint> pointList){
     QStringList recongnizerResult ;
 
     for (int i = 0;i<this->result->size();i++){
+        QString temp  = QString::fromLocal8Bit(result->value(i) );
         recongnizerResult << this->result->value(i);
         qDebug()<< result->value(i) << "\t" << result->score(i) ;
     }
@@ -147,4 +148,8 @@ void Recongnizer::demo(){
 
 
    emit this->notifyRecongnizerResult(recongnizerResult);
+}
+void Recongnizer::addStrokeSlot(int id ,QVector<QPoint> pointList){
+    qDebug()<<id <<pointList;
+    this->addStroke(id,pointList);
 }

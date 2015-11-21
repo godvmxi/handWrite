@@ -49,6 +49,7 @@ private :
 
 
    QColor lineColor;
+   QVector <QPoint> pointList ;
 
 public:
     HandWriteCore(QWidget *parent = 0);
@@ -77,6 +78,9 @@ public:
 
 private slots :
     void drawTimeoutEvent() ;
+public slots :
+
+
 
 
 protected:
@@ -85,7 +89,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event);
     void paintEvent ( QPaintEvent *event ) ;
 signals :
-    void add_strokes(QString strokes);
+    void addStrokeSignal(int id ,QVector<QPoint> pointList);
 };
 
 #endif // HandWriteCore_H

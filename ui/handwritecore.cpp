@@ -111,6 +111,11 @@ void HandWriteCore::mousePressEvent(QMouseEvent *event){
     qDebug()<<"press->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
      this->curPointIndex =  1;
 
+    this->pointList.clear();
+    QPoint temp = QPoint(event->x(),event->y());
+
+    this->pointList.append(temp);
+
 
 
 
@@ -126,7 +131,8 @@ void HandWriteCore::mouseMoveEvent(QMouseEvent *event){
   this->pointNumPerStroke[this->curStrokeIndex]++;
 
 //   qDebug()<<"move->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
-
+   QPoint temp = QPoint(event->x(),event->y());
+   this->pointList.append(temp);
 
    if(this->curPointIndex < MAX_POINT_PER_STROKE_NUM){
        this->curPointIndex++;
@@ -142,6 +148,9 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
 
     this->pointNumPerStroke[this->curStrokeIndex] = this->curPointIndex ;
     qDebug()<<"release->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
+    QPoint temp = QPoint(event->x(),event->y());
+    this->pointList.append(temp);
+    emit addStrokeSignal(this->curStrokeIndex,this->pointList);
 
     if(this->curStrokeIndex <  MAX_STROKE_NUM ) {
         this->curStrokeIndex++;
@@ -151,7 +160,7 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
         qDebug()<<"reach max stroke";
     }
     this->keyState = 1;
-    emit  this->add_strokes( this->getStrokesXmlString() );
+    //emit  this->add_strokes( this->getStrokesXmlString() );
 }
 void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
@@ -222,4 +231,7 @@ QString HandWriteCore::getStrokesXmlString(void){
     result .append( Temp );
 //    qDebug()<<result ;
     return result;
+}
+void addStroke(int id ,QVector<QPoint> pointList){
+
 }

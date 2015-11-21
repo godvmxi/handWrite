@@ -41,6 +41,10 @@ TopUI::TopUI(QWidget *parent) :
 
 
     this->lineEditChar =  new QLineEdit();
+    this->lineEditChar->setFixedHeight(60);\
+    this->lineEditChar->setStyleSheet("color:red");//文本颜色
+
+    this->lineEditChar->setFont(QFont("Timers" , 14 ,  QFont::Bold));
     this->vBoxLayoutMain->addWidget(this->lineEditChar);
 
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
@@ -48,17 +52,22 @@ TopUI::TopUI(QWidget *parent) :
 
     this->recongnizer = new Recongnizer(this,"/nfs/dev/HandWrite/model/handwriting-zh_CN.model",
                                             300,300);
+    connect(this->hwArea,
+            SIGNAL(addStrokeSignal(int,QVector<QPoint>)),
+            this->recongnizer,
+            SLOT(addStrokeSlot(int,QVector<QPoint>))
+            );
     connect(this->recongnizer,
             SIGNAL(notifyRecongnizerResult(QStringList)) ,
             this,
-            SLOT(getRecongnizerResult(QStringList) ) );
+            SLOT(updateRecongnizerResult(QStringList) ) );
     this->recongnizer->demo();
 
 }
  void TopUI::handleDrawSignal(QString xml) {
 
  }
- void TopUI::getRecongnizerResult(QStringList result){
+ void TopUI::updateRecongnizerResult(QStringList result){
      qDebug()<<result.join("++");
     this->lineEditChar->setText(result.join("   "));
  }

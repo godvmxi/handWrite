@@ -1,9 +1,9 @@
-#include "handwritecore.h"
+#include "DrawWidget.h"
 #include <QString>
 #include <QDebug>
 #include<zinnia.h>
 
-HandWriteCore::HandWriteCore(QWidget *parent)
+DrawWidget::DrawWidget(QWidget *parent)
     : QWidget(parent)
 {
     this->drawTimeout =  2000;//1s
@@ -27,32 +27,32 @@ HandWriteCore::HandWriteCore(QWidget *parent)
 
 
 }
-int HandWriteCore::getLineWidth() const
+int DrawWidget::getLineWidth() const
 {
     return lineWidth;
 }
 
-void HandWriteCore::setLineWidth(int value)
+void DrawWidget::setLineWidth(int value)
 {
     lineWidth = value;
 }
 
-int HandWriteCore::getDrawTimeout() const
+int DrawWidget::getDrawTimeout() const
 {
     return drawTimeout;
 }
 
-void HandWriteCore::setDrawTimeout(int value)
+void DrawWidget::setDrawTimeout(int value)
 {
     drawTimeout = value;
 }
 
-QColor HandWriteCore::getLineColor() const
+QColor DrawWidget::getLineColor() const
 {
     return lineColor;
 }
 
-void HandWriteCore::setLineColor(const QColor &value)
+void DrawWidget::setLineColor(const QColor &value)
 {
     lineColor = value;
 
@@ -60,38 +60,38 @@ void HandWriteCore::setLineColor(const QColor &value)
 
 
 
-int HandWriteCore::getWidgetWidth() const
+int DrawWidget::getWidgetWidth() const
 {
     return widgetWidth;
 }
 
-void HandWriteCore::setWidgetWidth(int value)
+void DrawWidget::setWidgetWidth(int value)
 {
     widgetWidth = value;
     this->setFixedWidth(this->widgetWidth);
 }
 
-int HandWriteCore::getWidgetHeight() const
+int DrawWidget::getWidgetHeight() const
 {
     return widgetHeight;
 }
 
-void HandWriteCore::setWidgetHeight(int value)
+void DrawWidget::setWidgetHeight(int value)
 {
     widgetHeight = value;
     this->setFixedHeight(this->widgetHeight);
 }
 
 
-HandWriteCore::~HandWriteCore()
+DrawWidget::~DrawWidget()
 {
 
 }
-void HandWriteCore::drawTimeoutEvent(){
+void DrawWidget::drawTimeoutEvent(){
     qDebug()<<"draw time out";
 }
 
-void HandWriteCore::mousePressEvent(QMouseEvent *event){
+void DrawWidget::mousePressEvent(QMouseEvent *event){
     this->firstPointTime =  QDateTime::currentDateTime().toMSecsSinceEpoch();
 
 //    Point p ;
@@ -120,7 +120,7 @@ void HandWriteCore::mousePressEvent(QMouseEvent *event){
 
 
 }
-void HandWriteCore::mouseMoveEvent(QMouseEvent *event){
+void DrawWidget::mouseMoveEvent(QMouseEvent *event){
    long long pointTime =  QDateTime::currentDateTime().toMSecsSinceEpoch() - this->firstPointTime ;
 
 
@@ -143,7 +143,7 @@ void HandWriteCore::mouseMoveEvent(QMouseEvent *event){
    }
 }
 
-void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
+void DrawWidget::mouseReleaseEvent(QMouseEvent *event){
 
 
     this->pointNumPerStroke[this->curStrokeIndex] = this->curPointIndex ;
@@ -162,7 +162,7 @@ void HandWriteCore::mouseReleaseEvent(QMouseEvent *event){
     this->keyState = 1;
     //emit  this->add_strokes( this->getStrokesXmlString() );
 }
-void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
+void DrawWidget::DrawWidget::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
     QPen pen;
     pen.setColor(this->lineColor);  //设置画笔为红色
@@ -187,22 +187,21 @@ void HandWriteCore::HandWriteCore::paintEvent ( QPaintEvent * event) {
             start.setY(this->pointPosArray[i][j-1].y );
             end.setX( this->pointPosArray[i][j].x);
             end.setY(this->pointPosArray[i][j].y);
-//            qDebug()<<"draw line-->"<<start<<end;
             painter.drawLine(start ,end );
-//            painter.drawLine(0,0,100,100);
+
 
 
         }
     }
     painter.end(); //结束绘制。绘制时使用的任何资源都被释放。虽然有时不需要调用end()，析构函数将会执行它
 }
- void HandWriteCore::cleanStroke(void){
+void DrawWidget::cleanStroke(void){
     this->curPointIndex = 0;
      for(int i =0;i<MAX_STROKE_NUM;i++){
          pointNumPerStroke[i] = 0;
      }
- }
-QString HandWriteCore::getStrokesXmlString(void){
+}
+QString DrawWidget::getStrokesXmlString(void){
 
     QString Temp ;
     QString result;

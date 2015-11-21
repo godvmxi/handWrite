@@ -2,7 +2,7 @@
 #define TOPUI_H
 
 #include <QWidget>
-#include "handwritecore.h"
+#include "DrawWidget.h"
 #include "chartable.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -19,7 +19,7 @@ public:
     explicit TopUI(QWidget *parent = 0);
 
 signals:
-    void queryHandWriteCoreCmd(QString cmd) ;
+    void queryDrawWidgetCmd(QString cmd) ;
 
 public slots:
     void updateRecongnizerResult(QStringList result) ;
@@ -29,7 +29,7 @@ private slots :
 
 
 private :
-    HandWriteCore *hwArea;
+    DrawWidget *hwArea;
     CharTable  *charTable;
     QWidget    *controlPanel;
     QVBoxLayout *vBoxLayoutMain;

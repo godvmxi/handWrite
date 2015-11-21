@@ -1,5 +1,5 @@
-#ifndef HandWriteCore_H
-#define HandWriteCore_H
+#ifndef DrawWidget_H
+#define DrawWidget_H
 
 #include <QWidget>
 #include <QMouseEvent>
@@ -23,7 +23,7 @@ typedef struct {
     Point start ;
     Point end;
 }Line;
-class HandWriteCore : public QWidget
+class DrawWidget : public QWidget
 {
     Q_OBJECT
 private :
@@ -52,8 +52,8 @@ private :
    QVector <QPoint> pointList ;
 
 public:
-    HandWriteCore(QWidget *parent = 0);
-    ~HandWriteCore();
+    DrawWidget(QWidget *parent = 0);
+    ~DrawWidget();
 
 
 
@@ -92,4 +92,4 @@ signals :
     void addStrokeSignal(int id ,QVector<QPoint> pointList);
 };
 
-#endif // HandWriteCore_H
+#endif // DrawWidget_H

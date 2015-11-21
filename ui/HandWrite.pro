@@ -14,17 +14,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    handwritecore.cpp \
     topui.cpp \
     chartable.cpp \
     socket.cpp \
-    recongnizer.cpp
+    recongnizer.cpp \
+    drawWidget.cpp
 
 HEADERS  += \
-    handwritecore.h \
     topui.h \
     chartable.h \
     socket.h \
     common.h \
-    recongnizer.h
+    recongnizer.h \
+    drawWidget.h
 

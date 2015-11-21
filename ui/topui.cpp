@@ -1,5 +1,5 @@
 #include "topui.h"
-#include "socket.h"
+
 
 TopUI::TopUI(QWidget *parent) :
     QWidget(parent)
@@ -21,7 +21,7 @@ TopUI::TopUI(QWidget *parent) :
 
 
 
-    this->hwArea = new HandWriteCore();
+    this->hwArea = new DrawWidget();
     this->hwArea->setFixedWidth(300);
     this->hwArea->setFixedHeight(300);
 

@@ -15,14 +15,10 @@ class CharTable : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CharTable(QWidget *parent = 0,int layoutType =  1,int displayChar = 5);
+    explicit CharTable(QWidget *parent = 0,int itemNum = 5);
 
     void clear (void) ;
     void setStringList(QStringList list);
-
-
-    int getMaxCharNumber() const;
-    void setMaxCharNumber(int value);
 
 
 signals:
@@ -30,12 +26,9 @@ signals:
 public slots:
 
 private :
-    QBoxLayout *layout;
-    int curCharNum;
-    int curCharIndex;
-    int maxCharNumber ;
-    int displayCharNum;
-    QVector <CharItem *> charList;
+    QHBoxLayout *layout;
+    int charItemNum;
+    QVector <void*> charList;
 
 };
 

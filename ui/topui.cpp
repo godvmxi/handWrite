@@ -46,7 +46,7 @@ TopUI::TopUI(QWidget *parent) :
 
     this->lineEditChar->setFont(QFont("Timers" , 14 ,  QFont::Bold));
     this->vBoxLayoutMain->addWidget(this->lineEditChar);
-    this->candidateTable =  new CharTable(this,1,10);
+    this->candidateTable =  new CharTable(this,10);
     this->vBoxLayoutMain->addWidget(this->candidateTable);
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);
@@ -62,12 +62,12 @@ TopUI::TopUI(QWidget *parent) :
             SIGNAL(notifyRecongnizerResult(QStringList)) ,
             this,
             SLOT(updateRecongnizerResult(QStringList) ) );
-    this->recongnizer->demo();
+    //this->recongnizer->demo();
 
 }
 
  void TopUI::updateRecongnizerResult(QStringList result){
-     qDebug()<<result.join("++");
+ //    qDebug()<<result.join("++");
     //this->lineEditChar->setText(result.join(" "));
      this->charTable->setStringList(result);
  }

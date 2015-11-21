@@ -23,9 +23,7 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     palette.setColor(QPalette::Background, QColor(192,253,123));
     this->setPalette(palette);
 
-    this->recongnizer = new Recongnizer(this,"/nfs/dev/HandWrite/model/handwriting-zh_CN.model",
-                                            300,300);
-    this->recongnizer->demo();
+
 
 
 }

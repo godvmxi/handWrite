@@ -8,7 +8,9 @@
 #include <QHBoxLayout>
 #include <QDebug>
 #include "socket.h"
- #include <QLineEdit>
+#include <QLineEdit>
+#include <QStringList>
+#include <QString>
 
 class TopUI : public QWidget
 {
@@ -20,9 +22,10 @@ signals:
     void queryHandWriteCoreCmd(QString cmd) ;
 
 public slots:
-
+    void getRecongnizerResult(QStringList result) ;
 private slots :
     void handleDrawSignal(QString xml) ;
+
 
 
 private :
@@ -34,6 +37,7 @@ private :
     QWidget *widgetSubBottom;
 
     QLineEdit *lineEditChar ;
+    Recongnizer * recongnizer;
 
 };
 

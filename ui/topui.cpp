@@ -15,10 +15,10 @@ TopUI::TopUI(QWidget *parent) :
 //    this->charTable = new CharTable();
 //     this->charTable->setFixedHeight(100);
 //return;
-qDebug()<<"2222";
+
     this->controlPanel = new QWidget();
     this->controlPanel->setFixedWidth(200);
-qDebug()<<"2222";
+
 
 
     this->hwArea = new HandWriteCore();
@@ -46,9 +46,20 @@ qDebug()<<"2222";
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);
 
-
+    this->recongnizer = new Recongnizer(this,"/nfs/dev/HandWrite/model/handwriting-zh_CN.model",
+                                            300,300);
+    connect(this->recongnizer,
+            SIGNAL(notifyRecongnizerResult(QStringList)) ,
+            this,
+            SLOT(getRecongnizerResult(QStringList) ) );
+    this->recongnizer->demo();
 
 }
  void TopUI::handleDrawSignal(QString xml) {
 
  }
+ void TopUI::getRecongnizerResult(QStringList result){
+     qDebug()<<result.join("++");
+    this->lineEditChar->setText(result.join("   "));
+ }
+

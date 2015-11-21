@@ -43,7 +43,7 @@ private :
    int widgetWidth ;
    int widgetHeight ;
 
-   Recongnizer * recongnizer;
+
 
 
 
@@ -77,6 +77,7 @@ public:
 
 private slots :
     void drawTimeoutEvent() ;
+
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);

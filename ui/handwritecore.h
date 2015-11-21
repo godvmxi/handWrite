@@ -11,6 +11,7 @@
 #include <QPaintEvent>
 #include <QColor>
 #include <QString>
+#include <recongnizer.h>
 #define MAX_STROKE_NUM    20
 #define MAX_POINT_PER_STROKE_NUM 40
 typedef  struct {
@@ -41,6 +42,10 @@ private :
    int lineWidth;
    int widgetWidth ;
    int widgetHeight ;
+
+   Recongnizer * recongnizer;
+
+
 
 
    QColor lineColor;

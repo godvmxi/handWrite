@@ -17,12 +17,14 @@ SOURCES += main.cpp \
     handwritecore.cpp \
     topui.cpp \
     chartable.cpp \
-    socket.cpp
+    socket.cpp \
+    recongnizer.cpp
 
 HEADERS  += \
     handwritecore.h \
     topui.h \
     chartable.h \
     socket.h \
-    common.h
+    common.h \
+    recongnizer.h
 

@@ -78,6 +78,10 @@ HandWriteCore::HandWriteCore(QWidget *parent)
     QPalette palette;
     palette.setColor(QPalette::Background, QColor(192,253,123));
     this->setPalette(palette);
+
+    this->recongnizer = new Recongnizer();
+    this->recongnizer->setModel("/nfs/dev/HandWrite/model/handwriting-zh_CN.model");
+
 }
 
 HandWriteCore::~HandWriteCore()
@@ -277,6 +281,7 @@ int HandWriteCore::demo(void){
           qDebug()<< recognizer->what() ;
          return -1;
       }
+
       for (size_t i = 0; i < result->size(); ++i) {
           QString temp  = QString::fromLocal8Bit(result->value(i) );
         unsigned char * tmp = (unsigned char *)result->value(i);
@@ -284,6 +289,7 @@ int HandWriteCore::demo(void){
          qDebug() <<"--->"<<temp<<"  --> "<< result->value(i) << "\t" << result->score(i) ;
 
       }
+
       delete result;
     }
     delete character;

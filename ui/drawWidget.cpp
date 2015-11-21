@@ -19,13 +19,16 @@ DrawWidget::DrawWidget(QWidget *parent)
     this->timer = new QTimer();
     this->timer->setInterval(this->drawTimeout);
     this->timer->setSingleShot(true);
+    connect(this->timer,
+            SIGNAL(timeout()),
+            this,
+            SLOT(drawTimeoutEvent())
+            );
+
     QPalette palette;
     palette.setColor(QPalette::Background, QColor(192,253,123));
     this->setPalette(palette);
-
-
-
-
+    this->timer->start();
 }
 int DrawWidget::getLineWidth() const
 {
@@ -87,28 +90,19 @@ DrawWidget::~DrawWidget()
 {
 
 }
-void DrawWidget::drawTimeoutEvent(){
-    qDebug()<<"draw time out";
-}
+
 
 void DrawWidget::mousePressEvent(QMouseEvent *event){
-    this->firstPointTime =  QDateTime::currentDateTime().toMSecsSinceEpoch();
+    this->updateTimer();
 
-//    Point p ;
-//    p.x  = event->x();
-//    p.y = event->y();
-//    p.timestamp = 0;
-
-//    this->lastPoint = p;
-//    this->curPoint = p;
     this->keyState = 0;
-//    qDebug()<<"press->"<<p.x <<p.y << p.timestamp;
+
     this->curPointIndex =  0;
     this->pointNumPerStroke[this->curStrokeIndex] = 1;
     this->pointPosArray[this->curStrokeIndex][this->curPointIndex].x = event->x()  ;
     this->pointPosArray[this->curStrokeIndex][this->curPointIndex].y = event->y()  ;
     this->pointPosArray[this->curStrokeIndex][this->curPointIndex].timestamp = 0 ;
-    qDebug()<<"press->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
+  //  qDebug()<<"press->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
      this->curPointIndex =  1;
 
     this->pointList.clear();
@@ -121,12 +115,13 @@ void DrawWidget::mousePressEvent(QMouseEvent *event){
 
 }
 void DrawWidget::mouseMoveEvent(QMouseEvent *event){
-   long long pointTime =  QDateTime::currentDateTime().toMSecsSinceEpoch() - this->firstPointTime ;
+   this->updateTimer();
+//   long long pointTime =  0 ;
 
 
    this->pointPosArray[this->curStrokeIndex][this->curPointIndex].x = event->x()  ;
    this->pointPosArray[this->curStrokeIndex][this->curPointIndex].y = event->y()  ;
-   this->pointPosArray[this->curStrokeIndex][this->curPointIndex].timestamp = pointTime ;
+//   this->pointPosArray[this->curStrokeIndex][this->curPointIndex].timestamp = pointTime ;
 
   this->pointNumPerStroke[this->curStrokeIndex]++;
 
@@ -145,7 +140,7 @@ void DrawWidget::mouseMoveEvent(QMouseEvent *event){
 
 void DrawWidget::mouseReleaseEvent(QMouseEvent *event){
 
-
+    this->updateTimer();
     this->pointNumPerStroke[this->curStrokeIndex] = this->curPointIndex ;
     qDebug()<<"release->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
     QPoint temp = QPoint(event->x(),event->y());
@@ -188,49 +183,30 @@ void DrawWidget::DrawWidget::paintEvent ( QPaintEvent * event) {
             end.setX( this->pointPosArray[i][j].x);
             end.setY(this->pointPosArray[i][j].y);
             painter.drawLine(start ,end );
-
-
-
         }
     }
     painter.end(); //结束绘制。绘制时使用的任何资源都被释放。虽然有时不需要调用end()，析构函数将会执行它
 }
-void DrawWidget::cleanStroke(void){
+void DrawWidget::cleanDrawArea(void){
     this->curPointIndex = 0;
      for(int i =0;i<MAX_STROKE_NUM;i++){
          pointNumPerStroke[i] = 0;
      }
+     this->update();
 }
-QString DrawWidget::getStrokesXmlString(void){
-
-    QString Temp ;
-    QString result;
-    qDebug()<<"1111";
 
 
-    qDebug()<<result;
-
-    Temp =  QString(tr("<strokes width=%1 height=%2>") ).arg(this->getWidgetWidth()).arg(this->getWidgetHeight());
-    result  =  Temp;
-
-    for(int i = 0 ;i <= this->curStrokeIndex;i++){
-        if(this->pointNumPerStroke[i] == 0)
-            continue;
-        Temp =  QString(tr("<stroke>") );
-         result .append( Temp );
-        for(int j = 0;j < this->pointNumPerStroke[i];j++){
-            Point *p = &pointPosArray[i][j];
-            Temp =  QString(tr("<point x=%1 y=%2 timestamp=%3 />") ).arg(p->x).arg(p->y).arg(p->timestamp);
-             result .append( Temp );
-        }
-        Temp =  QString(tr("</stroke>") );
-         result .append( Temp );
-    }
-    Temp =  QString(tr("</strokes>") );
-    result .append( Temp );
-//    qDebug()<<result ;
-    return result;
+void DrawWidget::updateTimer(void){
+    this->timer->stop();
+    this->timer->setInterval(this->drawTimeout);
+    this->timer->start();
+//    this->curStrokeIndex = 0;
+//    this->update();
 }
-void addStroke(int id ,QVector<QPoint> pointList){
 
+void DrawWidget::drawTimeoutEvent(){
+    qDebug()<<"draw time out";
+
+    this->cleanDrawArea();
+    return;
 }

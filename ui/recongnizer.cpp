@@ -150,6 +150,6 @@ void Recongnizer::demo(){
    emit this->notifyRecongnizerResult(recongnizerResult);
 }
 void Recongnizer::addStrokeSlot(int id ,QVector<QPoint> pointList){
-    qDebug()<<id <<pointList;
+  //  qDebug()<<id <<pointList;
     this->addStroke(id,pointList);
 }

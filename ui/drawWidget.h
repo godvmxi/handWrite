@@ -12,8 +12,8 @@
 #include <QColor>
 #include <QString>
 #include <recongnizer.h>
-#define MAX_STROKE_NUM    20
-#define MAX_POINT_PER_STROKE_NUM 40
+#define MAX_STROKE_NUM    50
+#define MAX_POINT_PER_STROKE_NUM 60
 typedef  struct {
     int x ;
     int y;
@@ -50,6 +50,7 @@ private :
 
    QColor lineColor;
    QVector <QPoint> pointList ;
+   void updateTimer(void);
 
 public:
     DrawWidget(QWidget *parent = 0);
@@ -65,7 +66,7 @@ public:
 
     QColor getLineColor() const;
     void setLineColor(const QColor &value);
-    void cleanStroke(void);
+    void cleanDrawArea(void);
 
 
     int getWidgetWidth() const;
@@ -73,14 +74,12 @@ public:
 
     int getWidgetHeight() const;
     void setWidgetHeight(int value);
-    QString getStrokesXmlString(void);
+
 
 
 private slots :
     void drawTimeoutEvent() ;
 public slots :
-
-
 
 
 protected:

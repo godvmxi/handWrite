@@ -60,8 +60,8 @@ TopUI::TopUI(QWidget *parent) :
             );
     connect(this->recongnizer,
             SIGNAL(notifyRecongnizerResult(QStringList)) ,
-            this,
-            SLOT(updateRecongnizerResult(QStringList) ) );
+            this->candidateTable,
+            SLOT(updateStringListSlot(QStringList) ) );
     //this->recongnizer->demo();
 
 }
@@ -69,6 +69,6 @@ TopUI::TopUI(QWidget *parent) :
  void TopUI::updateRecongnizerResult(QStringList result){
  //    qDebug()<<result.join("++");
     //this->lineEditChar->setText(result.join(" "));
-     this->charTable->setStringList(result);
+     //this->charTable->setStringList(result);
  }
 

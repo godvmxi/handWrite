@@ -18,17 +18,18 @@ public:
     explicit CharTable(QWidget *parent = 0,int itemNum = 5);
 
     void clear (void) ;
-    void setStringList(QStringList list);
+
 
 
 signals:
 
 public slots:
+    void updateStringListSlot(QStringList list);
 
 private :
     QHBoxLayout *layout;
     int charItemNum;
-    QVector <void*> charList;
+    QVector <CharItem *> charList;
 
 };
 

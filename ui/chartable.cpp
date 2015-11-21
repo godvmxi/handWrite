@@ -15,7 +15,7 @@ CharTable::CharTable(QWidget *parent ,int itemNum ) :
 
         this->layout->addWidget(temp);
 
-//        this->charList.append((void *)temp);
+        this->charList.append(temp);
     }
 
     this->setLayout(this->layout);
@@ -27,13 +27,14 @@ CharTable::CharTable(QWidget *parent ,int itemNum ) :
 void CharTable::clear (void)  {
 
 }
-void CharTable::setStringList(QStringList list){
+void CharTable::updateStringListSlot(QStringList list){
     qDebug()<<"display list ->" << list;
-    CharItem *item ;
-    qDebug()<<this->charItemNum;
-
-//    for(int i = 0 ;i <this->displayCharNum ;i++){
-
-//    }
+//    CharItem *item ;
+    qDebug()<<this->charList.count() <<this->charList.size();
+    CharItem * temp ;
+    for(int i = 0 ;i <this->charItemNum ;i++){
+        temp = this->charList.at(i);
+        temp->setText(list.at(i));
+    }
 }
 

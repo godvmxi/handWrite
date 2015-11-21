@@ -1,6 +1,6 @@
 #include "chartable.h"
 
-CharTable::CharTable(QWidget *parent,int layoutType ,int displayChar ,int maxChar ) :
+CharTable::CharTable(QWidget *parent,int layoutType ,int displayChar ) :
     QWidget(parent)
 {
     if (layoutType == 1 ){
@@ -9,19 +9,25 @@ CharTable::CharTable(QWidget *parent,int layoutType ,int displayChar ,int maxCha
     else if (layoutType == 2 ){
         this->layout = (QBoxLayout *) new QVBoxLayout() ;
     }
+    //to do ,add more layout options
     else{
         return ;
     }
 //
     this->displayCharNum = displayChar;
-    this->maxCharNumber = maxChar;
     qDebug()<<layoutType<<this->displayCharNum<<this->maxCharNumber;
-    for(int i =  0; i<this->maxCharNumber;i++){
-         this->charList[i] =  new QPushButton();
-        this->charList[i]->setText("test");
+    CharItem * temp = NULL;
+    for(int i =  0; i<this->displayCharNum;i++){
+        temp =  new CharItem();
+        temp->setText("NULL");
+        temp->setFixedSize(40,40);
+
+        this->layout->addWidget(temp);
+
+        this->charList.append(temp);
     }
     for(int i = 0; i< this->displayCharNum;i++){
-        this->layout->addWidget(this->charList[i] );
+//        this->layout->addWidget(this->charList.data()+i );
     }
     this->setLayout(this->layout);
 }
@@ -29,29 +35,13 @@ CharTable::CharTable(QWidget *parent,int layoutType ,int displayChar ,int maxCha
 bool CharTable::appendChar (QString c)  {
     return true;
 }
-int CharTable::getMaxCharNumber() const
-{
-    return maxCharNumber;
-}
 
-void CharTable::setMaxCharNumber(int value)
-{
-    maxCharNumber = value;
-}
-int CharTable::getCurCharNum() const
-{
-    return curCharNum;
-}
-
-void CharTable::setCurCharNum(int value)
-{
-    curCharNum = value;
-}
 
 
 void CharTable::clear (void)  {
-    for(int i = 0 ;i <this->curCharNum ;i++){
-        this->charList[i]->setText("");
-    }
+//    QPushButton *button =  (QPushButton *)this->charList.data();
+//    for(int i = 0 ;i <this->curCharNum ;i++){
+//        button[i].setText("");
+//    }
 }
 

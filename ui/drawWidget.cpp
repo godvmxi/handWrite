@@ -29,6 +29,7 @@ DrawWidget::DrawWidget(QWidget *parent)
     palette.setColor(QPalette::Background, QColor(192,253,123));
     this->setPalette(palette);
     this->timer->start();
+    this->setStyleSheet("border:3px solid #222");
 }
 int DrawWidget::getLineWidth() const
 {
@@ -101,7 +102,7 @@ void DrawWidget::mousePressEvent(QMouseEvent *event){
     this->pointNumPerStroke[this->curStrokeIndex] = 1;
     this->pointPosArray[this->curStrokeIndex][this->curPointIndex].x = event->x()  ;
     this->pointPosArray[this->curStrokeIndex][this->curPointIndex].y = event->y()  ;
-    this->pointPosArray[this->curStrokeIndex][this->curPointIndex].timestamp = 0 ;
+
   //  qDebug()<<"press->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
      this->curPointIndex =  1;
 
@@ -142,9 +143,10 @@ void DrawWidget::mouseReleaseEvent(QMouseEvent *event){
 
     this->updateTimer();
     this->pointNumPerStroke[this->curStrokeIndex] = this->curPointIndex ;
-    qDebug()<<"release->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
+   // qDebug()<<"release->"<<this->curStrokeIndex<<this->curPointIndex << this->pointNumPerStroke[this->curStrokeIndex] ;
     QPoint temp = QPoint(event->x(),event->y());
     this->pointList.append(temp);
+    this->keyState = 1;
     emit addStrokeSignal(this->curStrokeIndex,this->pointList);
 
     if(this->curStrokeIndex <  MAX_STROKE_NUM ) {
@@ -154,8 +156,7 @@ void DrawWidget::mouseReleaseEvent(QMouseEvent *event){
     else {
         qDebug()<<"reach max stroke";
     }
-    this->keyState = 1;
-    //emit  this->add_strokes( this->getStrokesXmlString() );
+
 }
 void DrawWidget::DrawWidget::paintEvent ( QPaintEvent * event) {
     QPainter painter(this);
@@ -171,9 +172,9 @@ void DrawWidget::DrawWidget::paintEvent ( QPaintEvent * event) {
 
 
     for(int i = 0 ;i <= this->curStrokeIndex;i++){
-        if ( keyState) {
+        if ( this->keyState) {
 //            qDebug()<<"painter-->"<<curStrokeIndex << this->pointNumPerStroke[i] ;
-
+ //           qDebug()<<"key state error-->"<<keyState;
         }
 
         for(int j = 1;j < this->pointNumPerStroke[i];j++){
@@ -188,6 +189,7 @@ void DrawWidget::DrawWidget::paintEvent ( QPaintEvent * event) {
     painter.end(); //结束绘制。绘制时使用的任何资源都被释放。虽然有时不需要调用end()，析构函数将会执行它
 }
 void DrawWidget::cleanDrawArea(void){
+    this->curStrokeIndex = 0;
     this->curPointIndex = 0;
      for(int i =0;i<MAX_STROKE_NUM;i++){
          pointNumPerStroke[i] = 0;
@@ -205,8 +207,8 @@ void DrawWidget::updateTimer(void){
 }
 
 void DrawWidget::drawTimeoutEvent(){
-    qDebug()<<"draw time out";
-
+ //   qDebug()<<"draw time out";
+    this->curStrokeIndex = 0;
     this->cleanDrawArea();
     return;
 }

@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     chartable.cpp \
     socket.cpp \
     recongnizer.cpp \
-    drawWidget.cpp
+    drawWidget.cpp \
+    charitem.cpp
 
 HEADERS  += \
     topui.h \
@@ -26,5 +27,6 @@ HEADERS  += \
     socket.h \
     common.h \
     recongnizer.h \
-    drawWidget.h
+    drawWidget.h \
+    charitem.h
 

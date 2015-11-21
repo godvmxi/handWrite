@@ -12,8 +12,8 @@
 #include <QColor>
 #include <QString>
 #include <recongnizer.h>
-#define MAX_STROKE_NUM    50
-#define MAX_POINT_PER_STROKE_NUM 60
+#define MAX_STROKE_NUM    30
+#define MAX_POINT_PER_STROKE_NUM 200
 typedef  struct {
     int x ;
     int y;

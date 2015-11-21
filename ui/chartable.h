@@ -8,12 +8,14 @@
 #include <QString>
 #include <QBoxLayout>
 #include <QDebug>
+#include <QVector>
+#include <charitem.h>
 
 class CharTable : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CharTable(QWidget *parent = 0,int layoutType =  1,int displayChar = 5,int maxChar=15);
+    explicit CharTable(QWidget *parent = 0,int layoutType =  1,int displayChar = 5);
     bool appendChar(QString c);
     void clear (void) ;
 
@@ -21,8 +23,6 @@ public:
     int getMaxCharNumber() const;
     void setMaxCharNumber(int value);
 
-    int getCurCharNum() const;
-    void setCurCharNum(int value);
 
 signals:
 
@@ -34,7 +34,8 @@ private :
     int curCharIndex;
     int maxCharNumber ;
     int displayCharNum;
-    QPushButton* charList[] ;
+    QVector <CharItem *> charList;
+
 };
 
 #endif // CHARTABLE_H

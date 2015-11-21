@@ -13,7 +13,7 @@ class Recongnizer : public QObject
 {
     Q_OBJECT
 public:
-    explicit Recongnizer(QObject *parent = 0,QString model="",int width = 300,int height = 300);
+    explicit Recongnizer(QObject *parent = 0,QString model="",int width = 300,int height = 300,int candidateNum=10);
     bool setModel(QString model);
     QString getModel(void);
     void addStroke();
@@ -24,6 +24,8 @@ public:
     int getHeight();
     void addStroke(int id ,QVector<QPoint> pointList) ;
     void demo();
+    void setCandidateNum(int num);
+    int getCandidateNum(void);
 
 
 signals:
@@ -39,6 +41,7 @@ private :
     zinnia::Result *result;
     int width ;
     int height;
+    int candidateNum;
 
 };
 

@@ -7,10 +7,10 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QDebug>
-#include "socket.h"
 #include <QLineEdit>
 #include <QStringList>
 #include <QString>
+#include "chartable.h"
 
 class TopUI : public QWidget
 {
@@ -37,7 +37,8 @@ private :
     QWidget *widgetSubBottom;
 
     QLineEdit *lineEditChar ;
-    Recongnizer * recongnizer;
+    Recongnizer *recongnizer;
+    CharTable   *candidateTable ;
 
 };
 

@@ -46,12 +46,13 @@ TopUI::TopUI(QWidget *parent) :
 
     this->lineEditChar->setFont(QFont("Timers" , 14 ,  QFont::Bold));
     this->vBoxLayoutMain->addWidget(this->lineEditChar);
-
+    this->candidateTable =  new CharTable(this,1,10);
+    this->vBoxLayoutMain->addWidget(this->candidateTable);
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);
 
     this->recongnizer = new Recongnizer(this,"/nfs/dev/HandWrite/model/handwriting-zh_CN.model",
-                                            300,300);
+                                            300,300,15);
     connect(this->hwArea,
             SIGNAL(addStrokeSignal(int,QVector<QPoint>)),
             this->recongnizer,
@@ -69,6 +70,6 @@ TopUI::TopUI(QWidget *parent) :
  }
  void TopUI::updateRecongnizerResult(QStringList result){
      qDebug()<<result.join("++");
-    this->lineEditChar->setText(result.join("   "));
+    this->lineEditChar->setText(result.join(" "));
  }
 

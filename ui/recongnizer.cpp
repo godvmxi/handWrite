@@ -1,7 +1,7 @@
 #include "recongnizer.h"
 #include <QFileInfo>
 
-Recongnizer::Recongnizer(QObject *parent,QString model,int width ,int height) :
+Recongnizer::Recongnizer(QObject *parent,QString model,int width ,int height,int candidateNum) :
     QObject(parent)
 {
     this->recognizer = zinnia::Recognizer::create();
@@ -14,6 +14,7 @@ Recongnizer::Recongnizer(QObject *parent,QString model,int width ,int height) :
     this->character->clear();
     this->character->set_width(this->width);
     this->character->set_height(this->height);
+    this->candidateNum = candidateNum;
 
 }
 
@@ -43,7 +44,7 @@ void Recongnizer::addStroke(int id ,QVector<QPoint> pointList){
         this->character->add(id,temp.x(),temp.y());
     }
 
-    this->result = this->recognizer->classify(*this->character,10);
+    this->result = this->recognizer->classify(*this->character,this->candidateNum);
     if(!this->result){
         qDebug()<<"recongnizer no result -->"<< recognizer->what();
         return ;
@@ -51,9 +52,9 @@ void Recongnizer::addStroke(int id ,QVector<QPoint> pointList){
     QStringList recongnizerResult ;
 
     for (int i = 0;i<this->result->size();i++){
-        QString temp  = QString::fromLocal8Bit(result->value(i) );
+        //QString temp  = QString::fromLocal8Bit(result->value(i) );
         recongnizerResult << this->result->value(i);
-        qDebug()<< result->value(i) << "\t" << result->score(i) ;
+//        qDebug()<< result->value(i) << "\t" << result->score(i) ;
     }
     delete this->result;
     emit this->notifyRecongnizerResult(recongnizerResult);
@@ -100,7 +101,7 @@ void Recongnizer::demo(){
          return ;
       }
       for (size_t i = 0; i < this->result->size(); ++i) {
-        qDebug()<< this->result->value(i) << "\t" << this->result->score(i) ;
+    //    qDebug()<< this->result->value(i) << "\t" << this->result->score(i) ;
       }
       delete this->result;
     }
@@ -138,7 +139,7 @@ void Recongnizer::demo(){
           QString temp  = QString::fromLocal8Bit(result->value(i) );
 //          unsigned char * tmp = (unsigned char *)result->value(i);
 //          QString  test = QString().sprintf("\\%02X\\%0X\\%02X",tmp[0],tmp[1],tmp[2]);
-          qDebug() <<"--->"<<temp<<"  --> "<< result->value(i) << "\t" << result->score(i) ;
+//          qDebug() <<"--->"<<temp<<"  --> "<< result->value(i) << "\t" << result->score(i) ;
           recongnizerResult.append(temp );
 
       }
@@ -152,4 +153,11 @@ void Recongnizer::demo(){
 void Recongnizer::addStrokeSlot(int id ,QVector<QPoint> pointList){
   //  qDebug()<<id <<pointList;
     this->addStroke(id,pointList);
+}
+void Recongnizer::setCandidateNum(int num){
+    this->candidateNum =  num;
+}
+
+int Recongnizer::getCandidateNum(void){
+    return this->candidateNum;
 }

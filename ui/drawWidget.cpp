@@ -29,7 +29,13 @@ DrawWidget::DrawWidget(QWidget *parent)
     palette.setColor(QPalette::Background, QColor(192,253,123));
     this->setPalette(palette);
     this->timer->start();
-    this->setStyleSheet("border:3px solid #222");
+
+//    this->setStyleSheet("color: rgb(255, 255, 255);\
+//                        background-color: rgb(167, 205, 255);\
+//                        border:none;padding: 3px;\
+//                        font-family: \"Verdana\";\
+//                        font-size: 15px;\
+//                        text-align: center;");
 }
 int DrawWidget::getLineWidth() const
 {

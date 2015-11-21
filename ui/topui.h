@@ -24,7 +24,7 @@ signals:
 public slots:
     void updateRecongnizerResult(QStringList result) ;
 private slots :
-    void handleDrawSignal(QString xml) ;
+
 
 
 

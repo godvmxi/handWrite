@@ -65,9 +65,7 @@ TopUI::TopUI(QWidget *parent) :
     this->recongnizer->demo();
 
 }
- void TopUI::handleDrawSignal(QString xml) {
 
- }
  void TopUI::updateRecongnizerResult(QStringList result){
      qDebug()<<result.join("++");
     this->lineEditChar->setText(result.join(" "));

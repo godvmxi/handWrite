@@ -80,5 +80,6 @@ TopUI::TopUI(QWidget *parent) :
       this->lineEditChar->setText(temp);
       //clear draw widget
       this->hwArea->cleanDrawArea();
+      //you can register you own interface to system app
   }
 

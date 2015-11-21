@@ -16,6 +16,10 @@ CharTable::CharTable(QWidget *parent ,int itemNum ) :
         this->layout->addWidget(temp);
 
         this->charList.append(temp);
+        connect(temp,SIGNAL(notifyTextString(int,QString)),
+                this,
+                SLOT(charItemClickSlot(int,QString))
+                );
     }
 
     this->setLayout(this->layout);
@@ -34,7 +38,18 @@ void CharTable::updateStringListSlot(QStringList list){
     CharItem * temp ;
     for(int i = 0 ;i <this->charItemNum ;i++){
         temp = this->charList.at(i);
-        temp->setText(list.at(i));
+        if (list.at(i).isEmpty()){
+            temp->setDisabled(true);
+        }
+        else{
+            temp->setText(list.at(i));
+        }
     }
+}
+void CharTable::charItemClickSlot(int id,QString text){
+    QString result = QString(text);
+    int itemId =  id;
+    qDebug()<<"get click item -> "<<itemId<<result;
+    emit selectCharSignal(itemId,result);
 }
 

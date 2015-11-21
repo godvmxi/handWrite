@@ -62,13 +62,23 @@ TopUI::TopUI(QWidget *parent) :
             SIGNAL(notifyRecongnizerResult(QStringList)) ,
             this->candidateTable,
             SLOT(updateStringListSlot(QStringList) ) );
+    connect(this->candidateTable,
+            SIGNAL(selectCharSignal(int,QString)),
+            this,
+            SLOT(selectCharItemSLot(int,QString))
+            );
     //this->recongnizer->demo();
 
 }
 
  void TopUI::updateRecongnizerResult(QStringList result){
- //    qDebug()<<result.join("++");
-    //this->lineEditChar->setText(result.join(" "));
-     //this->charTable->setStringList(result);
+
  }
+  void TopUI::selectCharItemSLot(int id,QString text){
+      QString temp = this->lineEditChar->text() ;
+      temp.append(text);
+      this->lineEditChar->setText(temp);
+      //clear draw widget
+      this->hwArea->cleanDrawArea();
+  }
 

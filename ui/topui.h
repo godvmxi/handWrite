@@ -22,9 +22,10 @@ signals:
     void queryDrawWidgetCmd(QString cmd) ;
 
 public slots:
-    void updateRecongnizerResult(QStringList result) ;
-private slots :
 
+private slots :
+    void selectCharItemSLot(int id,QString text);
+    void updateRecongnizerResult(QStringList result) ;
 
 
 

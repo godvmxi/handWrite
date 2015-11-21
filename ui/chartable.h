@@ -22,9 +22,10 @@ public:
 
 
 signals:
-
+    void selectCharSignal(int id ,QString text);
 public slots:
     void updateStringListSlot(QStringList list);
+    void charItemClickSlot(int id,QString text);
 
 private :
     QHBoxLayout *layout;

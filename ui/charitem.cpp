@@ -1,9 +1,16 @@
 #include "charitem.h"
 
 
-CharItem::CharItem(QWidget *parent) :
+CharItem::CharItem(QWidget *parent,int id,QString text) :
     QPushButton(parent)
 {
+    this->id = id ;
+    this->setText(text);
+    connect(this,
+            SIGNAL(clicked()),
+            this,
+            SLOT(onClickSlot()));
+
     this->setStyleSheet("QPushButton{\
         color: rgb(255, 255, 255);\
         background-color: rgb(167, 205, 255);\
@@ -32,4 +39,12 @@ CharItem::CharItem(QWidget *parent) :
         background-repeat:no-repeat;\
         background-position: center left;\
     }");
+
+
+}
+
+
+void CharItem::onClickSlot(){
+    qDebug()<<this->id<<this->text();
+    emit this->notifyTextString(this->id,this->text());
 }

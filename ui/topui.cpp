@@ -68,6 +68,7 @@ TopUI::TopUI(QWidget *parent) :
 
  void TopUI::updateRecongnizerResult(QStringList result){
      qDebug()<<result.join("++");
-    this->lineEditChar->setText(result.join(" "));
+    //this->lineEditChar->setText(result.join(" "));
+     this->charTable->setStringList(result);
  }
 

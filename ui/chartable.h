@@ -16,8 +16,9 @@ class CharTable : public QWidget
     Q_OBJECT
 public:
     explicit CharTable(QWidget *parent = 0,int layoutType =  1,int displayChar = 5);
-    bool appendChar(QString c);
+
     void clear (void) ;
+    void setStringList(QStringList list);
 
 
     int getMaxCharNumber() const;

@@ -22,8 +22,8 @@ TopUI::TopUI(QWidget *parent) :
 
 
     this->hwArea = new DrawWidget();
-    this->hwArea->setFixedWidth(300);
-    this->hwArea->setFixedHeight(300);
+    this->hwArea->setFixedWidth(400);
+    this->hwArea->setFixedHeight(400);
 
 
 
@@ -52,7 +52,7 @@ TopUI::TopUI(QWidget *parent) :
     this->setLayout(this->vBoxLayoutMain);
 
     this->recongnizer = new Recongnizer(this,"/nfs/dev/HandWrite/model/handwriting-zh_CN.model",
-                                            300,300,15);
+                                            400,400,15);
     connect(this->hwArea,
             SIGNAL(addStrokeSignal(int,QVector<QPoint>)),
             this->recongnizer,

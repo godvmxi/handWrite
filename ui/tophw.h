@@ -1,5 +1,5 @@
-#ifndef TOPUI_H
-#define TOPUI_H
+#ifndef TopHW_H
+#define TopHW_H
 
 #include <QWidget>
 #include "DrawWidget.h"
@@ -12,11 +12,12 @@
 #include <QString>
 #include "chartable.h"
 
-class TopUI : public QWidget
+
+class TopHW : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TopUI(QWidget *parent = 0);
+    explicit TopHW(QWidget *parent = 0);
 
 signals:
     void queryDrawWidgetCmd(QString cmd) ;
@@ -25,7 +26,7 @@ public slots:
 
 private slots :
     void selectCharItemSLot(int id,QString text);
-    void updateRecongnizerResult(QStringList result) ;
+
 
 
 
@@ -43,4 +44,4 @@ private :
 
 };
 
-#endif // TOPUI_H
+#endif // TopHW_H

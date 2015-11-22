@@ -1,4 +1,5 @@
-#include "topui.h"
+#include "tophw.h"
+#include "topwrap.h"
 #include <QApplication>
 #include<QDebug>
 #include <QTextCodec>
@@ -12,8 +13,8 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 
     QApplication a(argc, argv);
-    TopUI ui;
-    ui.show();
+    TopWrap wrap;
+   // ui.show();
 
     return a.exec();
 }

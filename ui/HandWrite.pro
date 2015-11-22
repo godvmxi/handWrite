@@ -14,17 +14,21 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    topui.cpp \
     chartable.cpp \
     recongnizer.cpp \
     drawWidget.cpp \
-    charitem.cpp
+    charitem.cpp \
+    controlpanel.cpp \
+    topwrap.cpp \
+    tophw.cpp
 
 HEADERS  += \
-    topui.h \
     chartable.h \
     common.h \
     recongnizer.h \
     drawWidget.h \
-    charitem.h
+    charitem.h \
+    controlpanel.h \
+    topwrap.h \
+    tophw.h
 

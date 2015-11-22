@@ -1,7 +1,7 @@
-#include "topui.h"
+#include "tophw.h"
 
 
-TopUI::TopUI(QWidget *parent) :
+TopHW::TopHW(QWidget *parent) :
     QWidget(parent)
 {
 
@@ -34,7 +34,7 @@ TopUI::TopUI(QWidget *parent) :
     this->vBoxLayoutMain = new QVBoxLayout();
 
     this->hBoxLayoutSubBottom->addWidget(this->hwArea);
-    this->hBoxLayoutSubBottom->addWidget(this->controlPanel );
+//    this->hBoxLayoutSubBottom->addWidget(this->controlPanel );
 
     this->widgetSubBottom->setLayout(this->hBoxLayoutSubBottom);
 
@@ -71,14 +71,13 @@ TopUI::TopUI(QWidget *parent) :
 
 }
 
- void TopUI::updateRecongnizerResult(QStringList result){
 
- }
-  void TopUI::selectCharItemSLot(int id,QString text){
+  void TopHW::selectCharItemSLot(int id,QString text){
       QString temp = this->lineEditChar->text() ;
       temp.append(text);
       this->lineEditChar->setText(temp);
       //clear draw widget
+      id = id +1;
       this->hwArea->cleanDrawArea();
       //you can register you own interface to system app
   }

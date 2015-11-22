@@ -16,7 +16,6 @@ TEMPLATE = app
 SOURCES += main.cpp \
     topui.cpp \
     chartable.cpp \
-    socket.cpp \
     recongnizer.cpp \
     drawWidget.cpp \
     charitem.cpp
@@ -24,7 +23,6 @@ SOURCES += main.cpp \
 HEADERS  += \
     topui.h \
     chartable.h \
-    socket.h \
     common.h \
     recongnizer.h \
     drawWidget.h \

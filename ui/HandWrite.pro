@@ -5,7 +5,19 @@
 #-------------------------------------------------
 
 QT       += core gui network
-LIBS     += /usr/lib/libhwcore.so
+
+TARGET_PLAT   += ARM
+eval( $${TARGET_PLAT} = ARM ){
+    LIBS     +=  -L ./ -lzinnia
+    message("arm mips plat")
+}
+
+#eval( $${TARGET_PLAT} = X86 ){
+#    LIBS     += /usr/lib/libzinnia.so
+#    message("x86/64 plat")
+#}
+
+#LIBS     += /usr/lib/libzinnia.so
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

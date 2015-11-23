@@ -6,16 +6,19 @@
 
 QT       += core gui network
 
-TARGET_PLAT   += ARM
-eval( $${TARGET_PLAT} = ARM ){
-    LIBS     +=  -L ./ -lzinnia
-    message("arm mips plat")
-}
+#TARGET_PLAT_ARCH   = X86
+TARGET_PLAT_ARCH   = ARM
+#QMAKE_CFLAGS_DEBUG = -mfloat-abi=hard -mfpu=vfp
+QMAKE_CXXFLAGS = $$QMAKE_CFLAGS
 
-#eval( $${TARGET_PLAT} = X86 ){
-#    LIBS     += /usr/lib/libzinnia.so
-#    message("x86/64 plat")
-#}
+equals( TARGET_PLAT_ARCH ,  ARM ){
+    LIBS     +=  -L ../ -lzinnia
+    message("arm mips plat,link static ")
+}
+equals( TARGET_PLAT_ARCH , X86 ){
+    LIBS     += /usr/lib/libzinnia.so
+    message("x86/64 plat")
+}
 
 #LIBS     += /usr/lib/libzinnia.so
 

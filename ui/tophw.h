@@ -2,7 +2,7 @@
 #define TopHW_H
 
 #include <QWidget>
-#include "DrawWidget.h"
+#include "drawwidget.h"
 #include "chartable.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>

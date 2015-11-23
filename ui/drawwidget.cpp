@@ -1,4 +1,4 @@
-#include "DrawWidget.h"
+#include "drawwidget.h"
 #include <QString>
 #include <QDebug>
 #include<zinnia.h>

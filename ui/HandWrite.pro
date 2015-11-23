@@ -16,19 +16,19 @@ TEMPLATE = app
 SOURCES += main.cpp \
     chartable.cpp \
     recongnizer.cpp \
-    drawWidget.cpp \
     charitem.cpp \
     controlpanel.cpp \
     topwrap.cpp \
-    tophw.cpp
+    tophw.cpp \
+    drawwidget.cpp
 
 HEADERS  += \
     chartable.h \
     common.h \
     recongnizer.h \
-    drawWidget.h \
     charitem.h \
     controlpanel.h \
     topwrap.h \
-    tophw.h
+    tophw.h \
+    drawwidget.h
 

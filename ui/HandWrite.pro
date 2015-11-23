@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui network
-LIBS     += /usr/lib/libzinnia.so
+LIBS     += /usr/lib/libhwcore.so
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,5 +30,6 @@ HEADERS  += \
     controlpanel.h \
     topwrap.h \
     tophw.h \
-    drawwidget.h
+    drawwidget.h \
+    zinnia.h
 

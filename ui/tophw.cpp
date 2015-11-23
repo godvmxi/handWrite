@@ -51,7 +51,7 @@ TopHW::TopHW(QWidget *parent) :
     this->vBoxLayoutMain->addWidget(this->widgetSubBottom);
     this->setLayout(this->vBoxLayoutMain);
 
-    this->recongnizer = new Recongnizer(this,"/nfs/dev/HandWrite/model/handwriting-zh_CN.model",
+    this->recongnizer = new Recongnizer(this,"/usr/local/hwcore/handwriting-zh_CN.model",
                                             400,400,15);
     connect(this->hwArea,
             SIGNAL(addStrokeSignal(int,QVector<QPoint>)),
